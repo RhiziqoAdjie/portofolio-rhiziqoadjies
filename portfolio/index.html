@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhiziqo Adjie Syahputra - Portfolio</title>
+<meta name="description" content="Personal portfolio of Rhiziqo Adjie Syahputra — Web Developer">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- AOS animation library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ===== Animated background blobs ===== -->
+<div class="bg-decor">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<!-- ===== Motif bintang + jaring kursor di seluruh halaman ===== -->
+<canvas id="starCanvas" class="star-canvas" aria-hidden="true"></canvas>
+
+<!-- ===== Vertical social bar ===== -->
+<div class="social-rail">
+  <a href="https://linkedin.com/in/rhiziqoadjies" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+  <a href="https://instagram.com/zikoadjie_" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+  <a href="https://github.com/rhiziqoadjie" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+  <span class="rail-line"></span>
+</div>
+
+<!-- ===== Navbar ===== -->
+<header class="navbar-wrap">
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="logo">RAS</a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home" class="nav-link active" data-i18n="nav_home">Home</a></li>
+      <li><a href="#about" class="nav-link" data-i18n="nav_about">About</a></li>
+      <li><a href="#experience" class="nav-link" data-i18n="nav_experience">Experience</a></li>
+      <li><a href="#projects" class="nav-link" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#certificate" class="nav-link" data-i18n="nav_certificate">Certificate</a></li>
+      <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">
+        <i class="fa-regular fa-moon"></i>
+      </button>
+      <button id="langToggle" class="lang-btn" aria-label="Toggle language">ID</button>
+      <button id="burger" class="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ===== HOME / HERO ===== -->
+  <section id="home" class="section hero">
+    <div class="hero-text">
+      <p class="eyebrow" data-aos="fade-up" data-i18n="hero_greeting">Halo, saya</p>
+      <h1 data-aos="fade-up" data-aos-delay="100">
+        <span class="line-1">Rhiziqo Adjie</span>
+        <span class="line-2">Syahputra</span>
+      </h1>
+      <p class="role-line" data-aos="fade-up" data-aos-delay="200">
+        <span data-i18n="hero_we">We are</span> <span id="typed" class="typed-text"></span><span class="cursor">|</span>
+      </p>
+      <p class="hero-desc" data-aos="fade-up" data-aos-delay="300" data-i18n="hero_desc">
+        Saya membangun solusi digital yang modern, responsif dan user-friendly. Fokus pada kualitas, performa, dan pengalaman pengguna terbaik.
+      </p>
+      <div class="hero-actions" data-aos="fade-up" data-aos-delay="400">
+        <a href="#projects" class="btn btn-primary" data-i18n="hero_btn_project">Lihat Project</a>
+        <a href="#contact" class="btn btn-outline" data-i18n="hero_btn_contact">Hubungi Saya</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-zone" data-aos="zoom-in" data-aos-delay="200">
+      <div class="hero-photo" id="heroPhoto">
+        <div class="photo-ring">
+          <img src="assets/img/profile.jpg" alt="Rhiziqo Adjie Syahputra" onerror="this.src='https://placehold.co/600x700/dfe9d5/3a4a2a?text=Foto+Profil'">
+        </div>
+        <div class="ring-glow"></div>
+        <div class="ring-particle p1"></div>
+        <div class="ring-particle p2"></div>
+        <div class="ring-particle p3"></div>
+      </div>
+    </div>
+
+    <a href="#about" class="scroll-cue" aria-label="Scroll down"><i class="fa-solid fa-chevron-down"></i></a>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about" class="section about">
+    <p class="section-eyebrow" data-aos="fade-up" data-i18n="about_eyebrow">Kenali Saya</p>
+    <h2 class="section-title" data-aos="fade-up" data-i18n="about_title">Tentang Saya</h2>
+
+    <div class="about-frame" id="aboutFrame" data-aos="fade-up">
+      <div class="frame-glow"></div>
+      <div class="about-frame-photo">
+        <img src="assets/img/about.jpg" alt="About photo" onerror="this.src='https://placehold.co/500x600/dfe9d5/3a4a2a?text=Foto'">
+        <div class="about-stats">
+          <div class="stat">
+            <span class="stat-num" data-count="3">0</span>
+            <span class="stat-label" data-i18n="about_stat1">Tahun Belajar</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="12">0</span>
+            <span class="stat-label" data-i18n="about_stat2">Project Selesai</span>
+          </div>
+          <div class="stat">
+            <span class="stat-num" data-count="8">0</span>
+            <span class="stat-label" data-i18n="about_stat3">Sertifikat</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-frame-content">
+        <p data-i18n="about_p1">
+          Saya adalah seorang pengembang web yang bersemangat dalam menciptakan pengalaman digital yang bersih, fungsional, dan berdampak. Lulusan dengan dasar kuat di bidang ilmu komputer, saya senang menerjemahkan ide menjadi produk nyata yang bisa digunakan banyak orang.
+        </p>
+        <p data-i18n="about_p2">
+          Selain menulis kode, saya tertarik dengan desain antarmuka, optimasi performa, dan terus belajar teknologi baru. Saat ini saya fokus memperdalam ekosistem JavaScript modern dan praktik UI/UX yang baik.
+        </p>
+
+        <a href="assets/cv-rhiziqo.pdf" class="btn btn-primary" download data-i18n="about_btn_cv">
+          <i class="fa-solid fa-download"></i> Unduh CV
+        </a>
+      </div>
+    </div>
+
+    <!-- ===== TECH STACK & SOFTWARE ===== -->
+    <div class="skills-section">
+      <p class="section-eyebrow" data-aos="fade-up" data-i18n="skills_eyebrow">Kemampuan</p>
+      <h3 class="subsection-title" data-aos="fade-up" data-i18n="skills_title">Tech Stack &amp; Software</h3>
+
+      <div class="filter-bar" id="skillFilters" data-aos="fade-up"></div>
+
+      <div class="grid skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section id="experience" class="section experience">
+    <p class="section-eyebrow" data-aos="fade-up" data-i18n="exp_eyebrow">Perjalanan</p>
+    <h2 class="section-title" data-aos="fade-up" data-i18n="exp_title">Experience &amp; Education</h2>
+
+    <div class="timeline" id="timelineList">
+      <!-- populated by JS from data.js -->
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section id="projects" class="section projects">
+    <p class="section-eyebrow" data-aos="fade-up" data-i18n="proj_eyebrow">Karya Saya</p>
+    <h2 class="section-title" data-aos="fade-up" data-i18n="proj_title">Projects</h2>
+
+    <div class="filter-bar" id="projectFilters" data-aos="fade-up"></div>
+
+    <div class="carousel-wrap" data-aos="fade-up">
+      <button class="carousel-arrow left" id="projPrev" aria-label="Sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
+      <div class="carousel-track" id="projectsGrid"></div>
+      <button class="carousel-arrow right" id="projNext" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+  </section>
+
+  <!-- ===== CERTIFICATE ===== -->
+  <section id="certificate" class="section certificate">
+    <p class="section-eyebrow" data-aos="fade-up" data-i18n="cert_eyebrow">Pencapaian</p>
+    <h2 class="section-title" data-aos="fade-up" data-i18n="cert_title">Certificate</h2>
+
+    <div class="filter-bar" id="certFilters" data-aos="fade-up"></div>
+
+    <div class="grid certificate-grid" id="certificateGrid">
+      <!-- populated by JS from data.js -->
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section id="contact" class="section contact">
+    <p class="section-eyebrow" data-aos="fade-up" data-i18n="contact_eyebrow">Mari Terhubung</p>
+    <h2 class="section-title" data-aos="fade-up" data-i18n="contact_title">Hubungi Saya</h2>
+
+    <div class="contact-grid">
+      <div class="contact-info" data-aos="fade-right">
+        <p data-i18n="contact_desc">Punya project atau ide menarik? Jangan ragu untuk menghubungi saya, saya selalu terbuka untuk diskusi maupun peluang kolaborasi baru.</p>
+
+        <div class="contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>zikoadjie@gmail.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>+62 812-4666-5782</span>
+        </div>
+        <div class="contact-item">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Indonesia</span>
+        </div>
+
+        <div class="contact-socials">
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        </div>
+      </div>
+
+      <form class="contact-form" id="contactForm" data-aos="fade-left" action="https://formspree.io/f/mojojjlv" method="POST">
+        <div class="form-row">
+          <input type="text" name="name" placeholder="Nama Anda" required data-i18n-ph="form_name">
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="Email Anda" required data-i18n-ph="form_email">
+        </div>
+        <div class="form-row">
+          <input type="text" name="subject" placeholder="Subjek" data-i18n-ph="form_subject">
+        </div>
+        <div class="form-row">
+          <textarea name="message" rows="5" placeholder="Pesan Anda" required data-i18n-ph="form_message"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary full" data-i18n="form_submit">
+          <span class="btn-label">Kirim Pesan</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+        <p class="form-status" id="formStatus"></p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>&copy; <span id="year"></span> Rhiziqo Adjie Syahputra. <span data-i18n="footer_rights">Seluruh hak cipta dilindungi.</span></p>
+</footer>
+
+<!-- Lightbox for certificates -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <img src="" alt="" id="lightboxImg">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/particles-bg.js"></script>
+</body>
+</html>

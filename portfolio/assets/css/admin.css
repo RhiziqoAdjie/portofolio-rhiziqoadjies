@@ -1,0 +1,157 @@
+/* =====================================================
+   ADMIN DASHBOARD — menggunakan variabel warna dari
+   style.css (root sudah dimuat lebih dulu di admin.html)
+===================================================== */
+
+.admin-body{
+    min-height:100vh;
+    padding-bottom:60px;
+  }
+  
+  /* ---------- topbar ---------- */
+  .admin-topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;background:var(--nav-bg);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--card-border);position:sticky;top:0;z-index:50;
+  }
+  .admin-topbar .logo{font-family:var(--font-display);font-weight:700;font-size:1.2rem;color:var(--accent-dark);}
+  [data-theme="dark"] .admin-topbar .logo{color:var(--accent);}
+  .admin-topbar-actions{display:flex;gap:10px;align-items:center;}
+  .admin-topbar-actions a, .admin-topbar-actions button{
+    font-size:.85rem;font-weight:600;padding:9px 16px;border-radius:100px;
+    border:1px solid var(--card-border);color:var(--text-body);display:inline-flex;align-items:center;gap:8px;
+    transition:.25s;
+  }
+  [data-theme="dark"] .admin-topbar-actions a,[data-theme="dark"] .admin-topbar-actions button{color:var(--text-main);}
+  .admin-topbar-actions a:hover, .admin-topbar-actions button:hover{background:var(--accent-2);color:#fff;border-color:var(--accent-2);}
+  
+  /* ---------- login screen ---------- */
+  .admin-login-wrap{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;
+  }
+  .admin-login-card{
+    width:100%;max-width:400px;background:var(--card-bg);border:1px solid var(--card-border);
+    border-radius:var(--radius-lg);padding:40px 34px;backdrop-filter:blur(14px);
+    box-shadow:0 30px 70px rgba(0,0,0,0.12);text-align:center;
+  }
+  .admin-login-card i.lock-icon{font-size:2.2rem;color:var(--accent-2);margin-bottom:14px;}
+  .admin-login-card h1{font-family:var(--font-display);font-size:1.4rem;color:var(--text-body);margin-bottom:6px;}
+  [data-theme="dark"] .admin-login-card h1{color:var(--text-main);}
+  .admin-login-card p.sub{font-size:.85rem;color:var(--text-muted);margin-bottom:24px;}
+  .admin-login-card input{
+    width:100%;padding:14px 16px;border-radius:var(--radius-sm);border:1px solid var(--card-border);
+    background:rgba(255,255,255,0.4);color:var(--text-body);font-size:.95rem;margin-bottom:14px;
+  }
+  [data-theme="dark"] .admin-login-card input{background:rgba(255,255,255,0.04);color:var(--text-main);}
+  .admin-login-card .btn-admin-primary{width:100%;justify-content:center;}
+  .admin-login-error{color:#c0392b;font-size:.82rem;margin-top:10px;min-height:1.2em;}
+  .admin-login-hint{font-size:.72rem;color:var(--text-muted);margin-top:18px;line-height:1.6;}
+  
+  /* ---------- shell layout ---------- */
+  .admin-shell{display:none;max-width:1280px;margin:0 auto;padding:28px 24px;gap:26px;grid-template-columns:220px 1fr;}
+  .admin-shell.active{display:grid;}
+  
+  .admin-sidebar{
+    background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-md);
+    padding:16px;height:fit-content;position:sticky;top:90px;
+  }
+  .admin-nav-btn{
+    width:100%;text-align:left;padding:12px 14px;border-radius:12px;font-size:.9rem;font-weight:600;
+    color:var(--text-body);display:flex;align-items:center;gap:10px;margin-bottom:6px;transition:.2s;
+  }
+  [data-theme="dark"] .admin-nav-btn{color:var(--text-main);}
+  .admin-nav-btn:hover{background:var(--bg-soft);}
+  .admin-nav-btn.active{background:linear-gradient(135deg,var(--accent-dark),var(--accent-2));color:#fff;}
+  
+  .admin-main{min-width:0;}
+  .admin-panel{display:none;}
+  .admin-panel.active{display:block;}
+  
+  .admin-card{
+    background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius-md);
+    padding:26px 28px;margin-bottom:24px;backdrop-filter:blur(10px);
+  }
+  .admin-card h2{font-family:var(--font-display);font-size:1.25rem;color:var(--text-body);margin-bottom:6px;}
+  [data-theme="dark"] .admin-card h2{color:var(--text-main);}
+  .admin-card p.hint{font-size:.82rem;color:var(--text-muted);margin-bottom:20px;line-height:1.6;}
+  
+  /* ---------- form fields ---------- */
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .field-grid.single{grid-template-columns:1fr;}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:.8rem;font-weight:600;color:var(--text-body);margin-bottom:6px;}
+  [data-theme="dark"] .field label{color:var(--text-main);}
+  .field input, .field textarea, .field select{
+    width:100%;padding:11px 14px;border-radius:var(--radius-sm);border:1px solid var(--card-border);
+    background:rgba(255,255,255,0.5);color:var(--text-body);font-family:inherit;font-size:.9rem;resize:vertical;
+  }
+  [data-theme="dark"] .field input,[data-theme="dark"] .field textarea,[data-theme="dark"] .field select{
+    background:rgba(255,255,255,0.04);color:var(--text-main);
+  }
+  .field input:focus, .field textarea:focus, .field select:focus{outline:none;border-color:var(--accent-2);}
+  .field small{display:block;margin-top:4px;color:var(--text-muted);font-size:.72rem;}
+  
+  .tabs-lang{display:flex;gap:8px;margin-bottom:18px;}
+  .tabs-lang button{
+    padding:8px 18px;border-radius:100px;border:1px solid var(--card-border);font-size:.8rem;font-weight:700;color:var(--text-body);
+  }
+  [data-theme="dark"] .tabs-lang button{color:var(--text-main);}
+  .tabs-lang button.active{background:var(--accent-2);color:#fff;border-color:var(--accent-2);}
+  .lang-block{display:none;}
+  .lang-block.active{display:block;}
+  
+  /* ---------- repeatable item cards (experience/projects/certificates/skills) ---------- */
+  .item-list{display:flex;flex-direction:column;gap:16px;margin-bottom:18px;}
+  .item-card{
+    border:1px solid var(--card-border);border-radius:var(--radius-md);padding:20px;position:relative;
+    background:rgba(255,255,255,0.35);
+  }
+  [data-theme="dark"] .item-card{background:rgba(255,255,255,0.02);}
+  .item-card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+  .item-card-head span{font-size:.78rem;font-weight:700;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;}
+  [data-theme="dark"] .item-card-head span{color:var(--accent);}
+  .item-delete-btn{
+    width:32px;height:32px;border-radius:50%;border:1px solid var(--card-border);color:#c0392b;
+    display:flex;align-items:center;justify-content:center;transition:.2s;
+  }
+  .item-delete-btn:hover{background:#c0392b;color:#fff;border-color:#c0392b;}
+  
+  /* ---------- buttons ---------- */
+  .btn-admin-primary, .btn-admin-outline, .btn-admin-danger{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:100px;
+    font-weight:700;font-size:.88rem;transition:.25s;cursor:pointer;
+  }
+  .btn-admin-primary{background:linear-gradient(135deg,var(--accent-dark),var(--accent-2));color:#fff;box-shadow:0 10px 22px rgba(74,124,58,0.3);}
+  .btn-admin-primary:hover{transform:translateY(-2px);}
+  .btn-admin-outline{background:transparent;border:1.5px solid var(--card-border);color:var(--text-body);}
+  [data-theme="dark"] .btn-admin-outline{color:var(--text-main);}
+  .btn-admin-outline:hover{border-color:var(--accent-2);color:var(--accent-dark);}
+  .btn-admin-danger{background:transparent;border:1.5px solid #c0392b;color:#c0392b;}
+  .btn-admin-danger:hover{background:#c0392b;color:#fff;}
+  
+  .admin-actions-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;}
+  
+  /* ---------- publish panel ---------- */
+  .publish-steps{list-style:decimal;padding-left:20px;line-height:1.9;font-size:.9rem;color:var(--text-body);}
+  [data-theme="dark"] .publish-steps{color:var(--text-main);}
+  .publish-steps li{margin-bottom:6px;}
+  .warn-box{
+    background:rgba(230,126,34,0.12);border:1px solid rgba(230,126,34,0.35);color:#a85a10;
+    border-radius:var(--radius-sm);padding:14px 18px;font-size:.85rem;line-height:1.6;margin-bottom:20px;
+  }
+  [data-theme="dark"] .warn-box{color:#f0b46a;}
+  
+  /* ---------- toast ---------- */
+  .admin-toast{
+    position:fixed;bottom:26px;right:26px;background:var(--accent-2);color:#fff;padding:14px 22px;
+    border-radius:12px;font-size:.88rem;font-weight:600;box-shadow:0 14px 30px rgba(0,0,0,0.2);
+    opacity:0;transform:translateY(12px);transition:.3s;pointer-events:none;z-index:200;
+  }
+  .admin-toast.show{opacity:1;transform:translateY(0);}
+  
+  @media (max-width:860px){
+    .admin-shell{grid-template-columns:1fr;}
+    .admin-sidebar{position:static;display:flex;flex-wrap:wrap;gap:8px;}
+    .admin-nav-btn{width:auto;margin-bottom:0;}
+    .field-grid{grid-template-columns:1fr;}
+  }

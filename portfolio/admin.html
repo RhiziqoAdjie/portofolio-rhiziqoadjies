@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Rhiziqo Adjie Syahputra</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+<!-- ===== LOGIN ===== -->
+<div class="admin-login-wrap" id="loginWrap">
+  <div class="admin-login-card">
+    <i class="fa-solid fa-lock lock-icon"></i>
+    <h1>Admin Dashboard</h1>
+    <p class="sub">Masuk untuk mengelola konten website portfolio kamu.</p>
+    <form id="loginForm">
+      <input type="password" id="loginPassword" placeholder="Masukkan password admin" required autofocus>
+      <button type="submit" class="btn-admin-primary">
+        <i class="fa-solid fa-right-to-bracket"></i> Masuk
+      </button>
+    </form>
+    <p class="admin-login-error" id="loginError"></p>
+    <p class="admin-login-hint">Password default: <strong>admin123</strong>. Segera ganti lewat tab Pengaturan setelah masuk.</p>
+  </div>
+</div>
+
+<!-- ===== DASHBOARD ===== -->
+<div id="adminShell" style="display:none;">
+
+  <div class="admin-topbar">
+    <span class="logo">RAS — Admin Dashboard</span>
+    <div class="admin-topbar-actions">
+      <a href="index.html" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Website</a>
+      <button id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Keluar</button>
+    </div>
+  </div>
+
+  <div class="admin-shell" id="adminShellGrid">
+    <aside class="admin-sidebar">
+      <button class="admin-nav-btn active" data-panel="panel-profile"><i class="fa-solid fa-user"></i> Profil &amp; About</button>
+      <button class="admin-nav-btn" data-panel="panel-contact"><i class="fa-solid fa-address-book"></i> Kontak</button>
+      <button class="admin-nav-btn" data-panel="panel-experience"><i class="fa-solid fa-briefcase"></i> Experience</button>
+      <button class="admin-nav-btn" data-panel="panel-projects"><i class="fa-solid fa-diagram-project"></i> Projects</button>
+      <button class="admin-nav-btn" data-panel="panel-certificates"><i class="fa-solid fa-certificate"></i> Certificate</button>
+      <button class="admin-nav-btn" data-panel="panel-skills"><i class="fa-solid fa-layer-group"></i> Skills</button>
+      <button class="admin-nav-btn" data-panel="panel-publish"><i class="fa-solid fa-cloud-arrow-up"></i> Publish</button>
+      <button class="admin-nav-btn" data-panel="panel-settings"><i class="fa-solid fa-gear"></i> Pengaturan</button>
+    </aside>
+
+    <main class="admin-main">
+
+      <!-- ===== PROFILE & ABOUT ===== -->
+      <section class="admin-panel active" id="panel-profile">
+        <div class="admin-card">
+          <h2>Identitas &amp; Statistik</h2>
+          <p class="hint">Nama yang tampil di halaman Hero, path file CV, dan angka statistik di bagian About.</p>
+          <div class="field-grid">
+            <div class="field"><label>Nama Baris 1</label><input type="text" id="f_name1"></div>
+            <div class="field"><label>Nama Baris 2</label><input type="text" id="f_name2"></div>
+          </div>
+          <div class="field">
+            <label>Path File CV</label>
+            <input type="text" id="f_cv">
+            <small>Unggah file PDF ke folder <code>assets/</code> lalu tulis nama filenya di sini.</small>
+          </div>
+          <div class="field-grid">
+            <div class="field"><label>Tahun Belajar</label><input type="number" id="f_stat_years"></div>
+            <div class="field"><label>Project Selesai</label><input type="number" id="f_stat_projects"></div>
+            <div class="field"><label>Sertifikat</label><input type="number" id="f_stat_certs"></div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h2>Teks Hero &amp; About</h2>
+          <p class="hint">Isi untuk kedua bahasa (ID/EN) — tombol bahasa di navbar akan menampilkan versi yang sesuai.</p>
+          <div class="tabs-lang">
+            <button type="button" class="active" data-lang="id">Bahasa Indonesia</button>
+            <button type="button" data-lang="en">English</button>
+          </div>
+
+          <div class="lang-block active" id="lang_id">
+            <div class="field"><label>Sapaan (mis. "Halo, saya")</label><input type="text" id="f_id_greeting"></div>
+            <div class="field"><label>Awalan Peran (mis. "We are")</label><input type="text" id="f_id_we"></div>
+            <div class="field"><label>Peran Berjalan (pisahkan dengan koma)</label><input type="text" id="f_id_roles" placeholder="Web Development, Data Analyst, UI/UX Designer"></div>
+            <div class="field"><label>Deskripsi Hero</label><textarea id="f_id_desc" rows="3"></textarea></div>
+            <div class="field"><label>Paragraf About 1</label><textarea id="f_id_p1" rows="3"></textarea></div>
+            <div class="field"><label>Paragraf About 2</label><textarea id="f_id_p2" rows="3"></textarea></div>
+            <div class="field"><label>Teks Footer (hak cipta)</label><input type="text" id="f_id_footer"></div>
+          </div>
+
+          <div class="lang-block" id="lang_en">
+            <div class="field"><label>Greeting (e.g. "Hello, I'm")</label><input type="text" id="f_en_greeting"></div>
+            <div class="field"><label>Role Prefix (e.g. "I am a")</label><input type="text" id="f_en_we"></div>
+            <div class="field"><label>Typed Roles (comma separated)</label><input type="text" id="f_en_roles"></div>
+            <div class="field"><label>Hero Description</label><textarea id="f_en_desc" rows="3"></textarea></div>
+            <div class="field"><label>About Paragraph 1</label><textarea id="f_en_p1" rows="3"></textarea></div>
+            <div class="field"><label>About Paragraph 2</label><textarea id="f_en_p2" rows="3"></textarea></div>
+            <div class="field"><label>Footer Text (copyright)</label><input type="text" id="f_en_footer"></div>
+          </div>
+
+          <div class="admin-actions-row">
+            <button class="btn-admin-primary" id="saveProfileBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Profil &amp; About</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTACT ===== -->
+      <section class="admin-panel" id="panel-contact">
+        <div class="admin-card">
+          <h2>Informasi Kontak</h2>
+          <p class="hint">Tampil di bagian Contact halaman utama.</p>
+          <div class="field-grid">
+            <div class="field"><label>Email</label><input type="text" id="f_email"></div>
+            <div class="field"><label>Nomor Telepon</label><input type="text" id="f_phone"></div>
+          </div>
+          <div class="field"><label>Lokasi</label><input type="text" id="f_location"></div>
+          <div class="field-grid">
+            <div class="field"><label>LinkedIn URL</label><input type="text" id="f_linkedin"></div>
+            <div class="field"><label>Instagram URL</label><input type="text" id="f_instagram"></div>
+          </div>
+          <div class="field"><label>GitHub URL</label><input type="text" id="f_github"></div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-primary" id="saveContactBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Kontak</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== EXPERIENCE ===== -->
+      <section class="admin-panel" id="panel-experience">
+        <div class="admin-card">
+          <h2>Experience &amp; Education</h2>
+          <p class="hint">Urutan kartu di sini sama dengan urutan tampil di timeline halaman utama.</p>
+          <div class="item-list" id="experienceList"></div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-outline" id="addExperienceBtn"><i class="fa-solid fa-plus"></i> Tambah Pengalaman</button>
+            <button class="btn-admin-primary" id="saveExperienceBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Semua Pengalaman</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PROJECTS ===== -->
+      <section class="admin-panel" id="panel-projects">
+        <div class="admin-card">
+          <h2>Projects</h2>
+          <p class="hint">Gambar pertama pada daftar "URL Gambar" jadi thumbnail utama; sisanya bisa digeser di kartu project.</p>
+          <div class="item-list" id="projectsList"></div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-outline" id="addProjectBtn"><i class="fa-solid fa-plus"></i> Tambah Project</button>
+            <button class="btn-admin-primary" id="saveProjectsBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Semua Project</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CERTIFICATES ===== -->
+      <section class="admin-panel" id="panel-certificates">
+        <div class="admin-card">
+          <h2>Certificate</h2>
+          <p class="hint">Kategori menentukan filter di halaman utama, contoh: internship, training, certification.</p>
+          <div class="item-list" id="certificatesList"></div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-outline" id="addCertificateBtn"><i class="fa-solid fa-plus"></i> Tambah Sertifikat</button>
+            <button class="btn-admin-primary" id="saveCertificatesBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Semua Sertifikat</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SKILLS ===== -->
+      <section class="admin-panel" id="panel-skills">
+        <div class="admin-card">
+          <h2>Tech Stack &amp; Software</h2>
+          <p class="hint">Gunakan nama kelas ikon dari <a href="https://fontawesome.com/search" target="_blank" rel="noopener">Font Awesome</a>, contoh: fa-brands fa-react.</p>
+          <div class="item-list" id="skillsList"></div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-outline" id="addSkillBtn"><i class="fa-solid fa-plus"></i> Tambah Skill</button>
+            <button class="btn-admin-primary" id="saveSkillsBtn"><i class="fa-solid fa-floppy-disk"></i> Simpan Semua Skill</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== PUBLISH ===== -->
+      <section class="admin-panel" id="panel-publish">
+        <div class="admin-card">
+          <h2>Publish Perubahan</h2>
+          <div class="warn-box">
+            <strong>Penting:</strong> website ini adalah situs statis tanpa server/database. Semua perubahan di dashboard ini
+            tersimpan di penyimpanan browser (localStorage) perangkat yang kamu pakai sekarang — jadi hanya kamu yang bisa
+            melihatnya lewat browser ini, dan pengunjung lain belum melihat perubahan tersebut. Untuk membuat perubahan
+            tampil permanen bagi semua orang, unduh file <code>data.js</code> terbaru lalu ganti file lama di server/hosting kamu.
+          </div>
+          <ol class="publish-steps">
+            <li>Klik <strong>"Lihat Preview"</strong> untuk mengecek tampilan sebelum dipublikasikan.</li>
+            <li>Klik <strong>"Unduh data.js"</strong> — file ini berisi semua konten terbaru (Experience, Projects, Certificate, Skills, teks ID/EN).</li>
+            <li>Ganti file <code>assets/js/data.js</code> di folder website/hosting kamu dengan file yang baru diunduh.</li>
+            <li>Upload ulang ke hosting (atau commit &amp; push jika pakai GitHub Pages/Netlify/Vercel).</li>
+          </ol>
+          <div class="admin-actions-row">
+            <button class="btn-admin-outline" id="previewBtn"><i class="fa-solid fa-eye"></i> Lihat Preview</button>
+            <button class="btn-admin-primary" id="downloadDataJsBtn"><i class="fa-solid fa-download"></i> Unduh data.js</button>
+            <button class="btn-admin-danger" id="resetBtn"><i class="fa-solid fa-rotate-left"></i> Reset ke Default</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== SETTINGS ===== -->
+      <section class="admin-panel" id="panel-settings">
+        <div class="admin-card">
+          <h2>Ganti Password Admin</h2>
+          <p class="hint">Password hanya tersimpan di browser ini (bukan sistem login server). Gunakan sekadar sebagai penghalang ringan agar orang lain tidak iseng mengubah isi website.</p>
+          <div class="field-grid">
+            <div class="field"><label>Password Saat Ini</label><input type="password" id="f_current_pass"></div>
+            <div class="field"><label>Password Baru</label><input type="password" id="f_new_pass"></div>
+          </div>
+          <div class="admin-actions-row">
+            <button class="btn-admin-primary" id="changePassBtn"><i class="fa-solid fa-key"></i> Ganti Password</button>
+          </div>
+          <p class="admin-login-error" id="passMsg"></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div class="admin-toast" id="adminToast"></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>

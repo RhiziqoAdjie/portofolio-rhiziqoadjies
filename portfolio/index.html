@@ -53,6 +53,9 @@
     </ul>
 
     <div class="nav-actions">
+      <a href="admin.html" class="icon-btn" aria-label="Admin Dashboard" title="Admin Dashboard">
+        <i class="fa-solid fa-user-shield"></i>
+      </a>
       <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">
         <i class="fa-regular fa-moon"></i>
       </button>
@@ -64,7 +67,8 @@
 
 <main>
 
-  <!-- ===== HOME / HERO ===== -->
+  <!-- ===== BAND 1 — HOME / HERO ===== -->
+  <div class="section-band">
   <section id="home" class="section hero">
     <div class="hero-text">
       <p class="eyebrow" data-aos="fade-up" data-i18n="hero_greeting">Halo, saya</p>
@@ -98,8 +102,10 @@
 
     <a href="#about" class="scroll-cue" aria-label="Scroll down"><i class="fa-solid fa-chevron-down"></i></a>
   </section>
+  </div><!-- /section-band 1 -->
 
-  <!-- ===== ABOUT ===== -->
+  <!-- ===== BAND 2 — ABOUT ===== -->
+  <div class="section-band">
   <section id="about" class="section about">
     <p class="section-eyebrow" data-aos="fade-up" data-i18n="about_eyebrow">Kenali Saya</p>
     <h2 class="section-title" data-aos="fade-up" data-i18n="about_title">Tentang Saya</h2>
@@ -132,7 +138,7 @@
           Selain menulis kode, saya tertarik dengan desain antarmuka, optimasi performa, dan terus belajar teknologi baru. Saat ini saya fokus memperdalam ekosistem JavaScript modern dan praktik UI/UX yang baik.
         </p>
 
-        <a href="assets/cv-rhiziqo.pdf" class="btn btn-primary" download data-i18n="about_btn_cv">
+        <a href="assets/CV - RHIZIQO ADJIE SYAHPUTRA.pdf" class="btn btn-primary" download data-i18n="about_btn_cv">
           <i class="fa-solid fa-download"></i> Unduh CV
         </a>
       </div>
@@ -148,8 +154,10 @@
       <div class="grid skills-grid" id="skillsGrid"></div>
     </div>
   </section>
+  </div><!-- /section-band 2 -->
 
-  <!-- ===== EXPERIENCE ===== -->
+  <!-- ===== BAND 3 — EXPERIENCE ===== -->
+  <div class="section-band">
   <section id="experience" class="section experience">
     <p class="section-eyebrow" data-aos="fade-up" data-i18n="exp_eyebrow">Perjalanan</p>
     <h2 class="section-title" data-aos="fade-up" data-i18n="exp_title">Experience &amp; Education</h2>
@@ -158,8 +166,10 @@
       <!-- populated by JS from data.js -->
     </div>
   </section>
+  </div><!-- /section-band 3 -->
 
-  <!-- ===== PROJECTS ===== -->
+  <!-- ===== BAND 4 — PROJECTS ===== -->
+  <div class="section-band">
   <section id="projects" class="section projects">
     <p class="section-eyebrow" data-aos="fade-up" data-i18n="proj_eyebrow">Karya Saya</p>
     <h2 class="section-title" data-aos="fade-up" data-i18n="proj_title">Projects</h2>
@@ -172,8 +182,10 @@
       <button class="carousel-arrow right" id="projNext" aria-label="Berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </section>
+  </div><!-- /section-band 4 -->
 
-  <!-- ===== CERTIFICATE ===== -->
+  <!-- ===== BAND 5 — CERTIFICATE ===== -->
+  <div class="section-band">
   <section id="certificate" class="section certificate">
     <p class="section-eyebrow" data-aos="fade-up" data-i18n="cert_eyebrow">Pencapaian</p>
     <h2 class="section-title" data-aos="fade-up" data-i18n="cert_title">Certificate</h2>
@@ -184,8 +196,10 @@
       <!-- populated by JS from data.js -->
     </div>
   </section>
+  </div><!-- /section-band 5 -->
 
-  <!-- ===== CONTACT ===== -->
+  <!-- ===== BAND 6 — CONTACT ===== -->
+  <div class="section-band">
   <section id="contact" class="section contact">
     <p class="section-eyebrow" data-aos="fade-up" data-i18n="contact_eyebrow">Mari Terhubung</p>
     <h2 class="section-title" data-aos="fade-up" data-i18n="contact_title">Hubungi Saya</h2>
@@ -235,11 +249,12 @@
       </form>
     </div>
   </section>
+  </div><!-- /section-band 6 -->
 
 </main>
 
 <footer class="footer">
-  <p>&copy; <span id="year"></span> Rhiziqo Adjie Syahputra. <span data-i18n="footer_rights">Seluruh hak cipta dilindungi.</span></p>
+  <p>&copy; <span id="year"></span> Rhiziqo Adjie Syahputra. <span data-i18n="footer_rights">Seluruh hak cipta dilindungi.</span> &middot; <a href="admin.html" class="footer-admin-link">Admin</a></p>
 </footer>
 
 <!-- Lightbox for certificates -->

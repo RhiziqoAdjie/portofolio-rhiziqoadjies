@@ -1,4 +1,3 @@
-
 const EXPERIENCE = [
   {
     year: "Aug 2023 - Des 2023",

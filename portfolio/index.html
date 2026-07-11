@@ -53,9 +53,6 @@
     </ul>
 
     <div class="nav-actions">
-      <a href="admin.html" class="icon-btn" aria-label="Admin Dashboard" title="Admin Dashboard">
-        <i class="fa-solid fa-user-shield"></i>
-      </a>
       <button id="themeToggle" class="icon-btn" aria-label="Toggle dark mode">
         <i class="fa-regular fa-moon"></i>
       </button>
@@ -260,7 +257,9 @@
 <!-- Lightbox for certificates -->
 <div class="lightbox" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lightbox-nav left hidden" id="lightboxPrev" aria-label="Gambar sebelumnya"><i class="fa-solid fa-chevron-left"></i></button>
   <img src="" alt="" id="lightboxImg">
+  <button class="lightbox-nav right hidden" id="lightboxNext" aria-label="Gambar berikutnya"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>

@@ -18,6 +18,8 @@ function getDefaults() {
       name_line1: "Rhiziqo Adjie",
       name_line2: "Syahputra",
       cv_path: "assets/CV - RHIZIQO ADJIE SYAHPUTRA.pdf",
+      hero_photo: "",
+      about_photo: "",
       stats: { years: 3, projects: 12, certs: 8 },
       i18n: {
         id: { ...(typeof I18N !== 'undefined' ? I18N.id : {}) },
@@ -57,6 +59,8 @@ function getMerged() {
       name_line1: (s.profile && s.profile.name_line1) || d.profile.name_line1,
       name_line2: (s.profile && s.profile.name_line2) || d.profile.name_line2,
       cv_path: (s.profile && s.profile.cv_path) || d.profile.cv_path,
+      hero_photo: (s.profile && s.profile.hero_photo) || d.profile.hero_photo,
+      about_photo: (s.profile && s.profile.about_photo) || d.profile.about_photo,
       stats: Object.assign({}, d.profile.stats, (s.profile && s.profile.stats) || {}),
       i18n: {
         id: Object.assign({}, d.profile.i18n.id, (s.profile && s.profile.i18n && s.profile.i18n.id) || {}),
@@ -77,10 +81,14 @@ function getMerged() {
 }
 
 function saveSection(key, value) {
-  const raw = getRawOverride();
-  raw[key] = value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
-  showToast('Perubahan tersimpan di browser ini.');
+  try {
+    const raw = getRawOverride();
+    raw[key] = value;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
+    showToast('Perubahan tersimpan di browser ini.');
+  } catch (e) {
+    showToast('Gagal menyimpan — kemungkinan penyimpanan browser penuh (foto terlalu besar/banyak).');
+  }
 }
 
 /* ---------- toast ---------- */
@@ -90,7 +98,107 @@ function showToast(msg) {
   el.textContent = msg;
   el.classList.add('show');
   clearTimeout(toastTimeout);
-  toastTimeout = setTimeout(() => el.classList.remove('show'), 2600);
+  toastTimeout = setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+/* =====================================================
+   IMAGE MANAGER — upload satu atau banyak foto,
+   disimpan sebagai base64 (data URL) di dalam field
+   tersembunyi berformat JSON array.
+===================================================== */
+function fileToDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function imageManagerHtml(fieldKey, initialList, maxCount) {
+  const listJson = escapeHtml(JSON.stringify(initialList || []));
+  return `
+    <div class="image-manager" ${maxCount ? `data-max="${maxCount}"` : ''}>
+      <div class="image-thumbs" data-thumbs></div>
+      <div class="image-manager-controls">
+        <label class="image-upload-btn">
+          <i class="fa-solid fa-upload"></i> ${maxCount === 1 ? 'Upload Foto' : 'Upload Gambar'}
+          <input type="file" accept="image/*" ${maxCount === 1 ? '' : 'multiple'} class="image-upload-input">
+        </label>
+        <input type="text" class="image-url-input" placeholder="atau tempel URL/path gambar lalu tekan Enter">
+      </div>
+      <textarea class="images-hidden" data-field="${fieldKey}" style="display:none">${listJson}</textarea>
+    </div>
+  `;
+}
+
+function initImageManagers(root) {
+  root.querySelectorAll('.image-manager').forEach(manager => {
+    if (manager.dataset.wired === 'true') return;
+    manager.dataset.wired = 'true';
+
+    const thumbsEl = manager.querySelector('[data-thumbs]');
+    const hidden = manager.querySelector('.images-hidden');
+    const fileInput = manager.querySelector('.image-upload-input');
+    const urlInput = manager.querySelector('.image-url-input');
+    const maxCount = parseInt(manager.getAttribute('data-max') || '0', 10) || null;
+
+    function getList() {
+      try { return JSON.parse(hidden.value || '[]'); } catch (e) { return []; }
+    }
+    function setList(list) {
+      if (maxCount) list = list.slice(-maxCount);
+      hidden.value = JSON.stringify(list);
+      renderThumbs(list);
+    }
+    function renderThumbs(list) {
+      thumbsEl.innerHTML = list.map((src, i) => `
+        <div class="img-thumb-item">
+          <img src="${src}" alt="gambar ${i + 1}">
+          <button type="button" class="img-thumb-remove" data-idx="${i}" aria-label="Hapus gambar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `).join('') || `<p class="image-empty-hint">Belum ada gambar.</p>`;
+    }
+    renderThumbs(getList());
+
+    fileInput.addEventListener('change', async () => {
+      const files = Array.from(fileInput.files || []);
+      if (!files.length) return;
+      try {
+        const dataUrls = await Promise.all(files.map(fileToDataUrl));
+        const list = maxCount === 1 ? dataUrls.slice(-1) : getList().concat(dataUrls);
+        setList(list);
+      } catch (e) {
+        showToast('Gagal membaca file gambar.');
+      }
+      fileInput.value = '';
+    });
+
+    urlInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = urlInput.value.trim();
+        if (val) {
+          const list = maxCount === 1 ? [val] : getList().concat([val]);
+          setList(list);
+          urlInput.value = '';
+        }
+      }
+    });
+
+    thumbsEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.img-thumb-remove');
+      if (!btn) return;
+      const idx = parseInt(btn.getAttribute('data-idx'), 10);
+      const list = getList();
+      list.splice(idx, 1);
+      setList(list);
+    });
+  });
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 /* =====================================================
@@ -161,6 +269,14 @@ function renderProfileTab() {
   document.getElementById('f_stat_projects').value = c.profile.stats.projects;
   document.getElementById('f_stat_certs').value = c.profile.stats.certs;
 
+  const heroPhotoWrap = document.getElementById('heroPhotoManager');
+  heroPhotoWrap.innerHTML = imageManagerHtml('hero_photo', c.profile.hero_photo ? [c.profile.hero_photo] : [], 1);
+  initImageManagers(heroPhotoWrap);
+
+  const aboutPhotoWrap = document.getElementById('aboutPhotoManager');
+  aboutPhotoWrap.innerHTML = imageManagerHtml('about_photo', c.profile.about_photo ? [c.profile.about_photo] : [], 1);
+  initImageManagers(aboutPhotoWrap);
+
   ['id', 'en'].forEach(lang => {
     const dict = c.profile.i18n[lang] || {};
     document.getElementById(`f_${lang}_greeting`).value = dict.hero_greeting || '';
@@ -173,12 +289,22 @@ function renderProfileTab() {
   });
 
   document.getElementById('saveProfileBtn').onclick = () => {
-    const raw = getRawOverride();
     const base = getMerged().profile;
+
+    function firstImage(wrapId) {
+      const hidden = document.querySelector(`#${wrapId} .images-hidden`);
+      try {
+        const list = JSON.parse((hidden && hidden.value) || '[]');
+        return list[0] || '';
+      } catch (e) { return ''; }
+    }
+
     const newProfile = {
       name_line1: document.getElementById('f_name1').value.trim() || base.name_line1,
       name_line2: document.getElementById('f_name2').value.trim() || base.name_line2,
       cv_path: document.getElementById('f_cv').value.trim() || base.cv_path,
+      hero_photo: firstImage('heroPhotoManager'),
+      about_photo: firstImage('aboutPhotoManager'),
       stats: {
         years: parseInt(document.getElementById('f_stat_years').value, 10) || 0,
         projects: parseInt(document.getElementById('f_stat_projects').value, 10) || 0,
@@ -242,6 +368,15 @@ function renderContactTab() {
 ===================================================== */
 function fieldHtml(sectionKey, idx, field, value) {
   const id = `${sectionKey}_${idx}_${field.key}`;
+
+  if (field.type === 'imagelist') {
+    const list = Array.isArray(value) ? value : (value ? [value] : []);
+    return `<div class="field field-full">
+      <label>${field.label}</label>
+      ${imageManagerHtml(field.key, list, field.max || null)}
+      ${field.hint ? `<small>${field.hint}</small>` : ''}
+    </div>`;
+  }
   if (field.type === 'textarea') {
     return `<div class="field"><label for="${id}">${field.label}</label>
       <textarea id="${id}" data-field="${field.key}" rows="3">${escapeHtml(value || '')}</textarea></div>`;
@@ -258,10 +393,6 @@ function fieldHtml(sectionKey, idx, field, value) {
   }
   return `<div class="field"><label for="${id}">${field.label}</label>
     <input type="text" id="${id}" data-field="${field.key}" value="${escapeHtml(value || '')}" placeholder="${field.placeholder || ''}"></div>`;
-}
-
-function escapeHtml(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function renderItemCard(sectionKey, idx, item, schema, labelName) {
@@ -287,6 +418,8 @@ function collectItemCards(sectionKey, schema) {
       if (!input) return;
       if (f.type === 'taglist') {
         obj[f.key] = input.value.split(',').map(s => s.trim()).filter(Boolean);
+      } else if (f.type === 'imagelist') {
+        try { obj[f.key] = JSON.parse(input.value || '[]'); } catch (e) { obj[f.key] = []; }
       } else {
         obj[f.key] = input.value;
       }
@@ -302,6 +435,7 @@ function wireListPanel(sectionKey, schema, labelName, listContainerId, addBtnId,
   function repaint() {
     const items = getMerged()[sectionKey] || [];
     container.innerHTML = items.map((item, i) => renderItemCard(sectionKey, i, item, schema, labelName)).join('');
+    initImageManagers(container);
   }
   repaint();
 
@@ -309,7 +443,6 @@ function wireListPanel(sectionKey, schema, labelName, listContainerId, addBtnId,
     const btn = e.target.closest('[data-remove]');
     if (!btn) return;
     btn.closest('.item-card').remove();
-    // relabel numbering only (visual), index attr no longer matters after collect
     container.querySelectorAll('.item-card').forEach((card, i) => {
       card.querySelector('.item-card-head span').textContent = `${labelName} #${i + 1}`;
     });
@@ -317,9 +450,10 @@ function wireListPanel(sectionKey, schema, labelName, listContainerId, addBtnId,
 
   document.getElementById(addBtnId).addEventListener('click', () => {
     const blank = {};
-    schema.forEach(f => { blank[f.key] = f.type === 'taglist' ? [] : ''; });
+    schema.forEach(f => { blank[f.key] = (f.type === 'taglist' || f.type === 'imagelist') ? [] : ''; });
     const idx = container.querySelectorAll('.item-card').length;
     container.insertAdjacentHTML('beforeend', renderItemCard(sectionKey, idx, blank, schema, labelName));
+    initImageManagers(container);
   });
 
   document.getElementById(saveBtnId).addEventListener('click', () => {
@@ -342,7 +476,7 @@ const PROJECTS_SCHEMA = [
   { key: 'title', label: 'Judul Project', type: 'text' },
   { key: 'category', label: 'Kategori', type: 'text', placeholder: 'web / design / dll' },
   { key: 'desc', label: 'Deskripsi', type: 'textarea' },
-  { key: 'images', label: 'URL Gambar (pisahkan dengan koma)', type: 'taglist' },
+  { key: 'images', label: 'Gambar Project', type: 'imagelist', hint: 'Bisa upload lebih dari satu foto sekaligus. Gambar pertama jadi thumbnail utama.' },
   { key: 'tags', label: 'Tags (pisahkan dengan koma)', type: 'taglist' },
   { key: 'demo', label: 'Link Demo', type: 'text' },
   { key: 'code', label: 'Link Kode (GitHub)', type: 'text' }
@@ -354,7 +488,7 @@ const CERTIFICATES_SCHEMA = [
   { key: 'date', label: 'Tanggal', type: 'text' },
   { key: 'category', label: 'Kategori', type: 'text', placeholder: 'internship / training / certification' },
   { key: 'desc', label: 'Deskripsi', type: 'textarea' },
-  { key: 'image', label: 'Path Gambar', type: 'text', placeholder: 'assets/img/certificates/nama.png' }
+  { key: 'images', label: 'Gambar Sertifikat', type: 'imagelist', hint: 'Bisa upload lebih dari satu (misal halaman depan & belakang sertifikat).' }
 ];
 
 const SKILLS_SCHEMA = [

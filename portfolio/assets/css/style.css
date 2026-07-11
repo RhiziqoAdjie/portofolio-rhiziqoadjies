@@ -1,18 +1,22 @@
 :root{
-  /* ---- color tokens (light) ---- */
-  --bg: #eef3e6;
-  --bg-soft: #e6eedb;
+  /* ---- color tokens (light) ----
+     Palet terang versi baru: latar netral hangat (bukan
+     hijau pucat merata) dengan aksen teal-emerald yang
+     lebih segar, supaya hijau hanya muncul di elemen
+     aksen/interaktif, bukan mendominasi seluruh layar. */
+  --bg: #f4f3ec;
+  --bg-soft: #ece9de;
   --text-main: #f7faf2;
-  --text-body: #5b6a52;
-  --text-muted: #7c8a72;
-  --accent: #5fd17a;
-  --accent-2: #4a7c3a;
-  --accent-dark: #3a5e2e;
-  --card-bg: rgba(255,255,255,0.55);
-  --card-border: rgba(255,255,255,0.7);
-  --glow: rgba(95,209,122,0.55);
-  --nav-bg: rgba(255,255,255,0.55);
-  --hero-heading: #2c3a22;     
+  --text-body: #55605a;
+  --text-muted: #83897f;
+  --accent: #35b07f;
+  --accent-2: #2c8562;
+  --accent-dark: #235f47;
+  --card-bg: rgba(255,255,255,0.62);
+  --card-border: rgba(255,255,255,0.8);
+  --glow: rgba(53,176,127,0.45);
+  --nav-bg: rgba(255,255,255,0.62);
+  --hero-heading: #26302a;     
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Inter', sans-serif;
@@ -528,6 +532,21 @@ button{font-family:inherit;border:none;background:none;cursor:pointer;}
   background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;
 }
 .lightbox-close:hover{background:var(--accent);color:#0e140a;}
+
+.lightbox-nav{
+  position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,0.1);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+  transition:var(--transition);
+}
+.lightbox-nav:hover{background:var(--accent);color:#0e140a;}
+.lightbox-nav.left{left:24px;}
+.lightbox-nav.right{right:24px;}
+.lightbox-nav.hidden{display:none;}
+@media (max-width:700px){
+  .lightbox-nav{width:40px;height:40px;font-size:.95rem;}
+  .lightbox-nav.left{left:8px;}
+  .lightbox-nav.right{right:8px;}
+}
 
 .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;}
 .contact-info p{line-height:1.8;margin-bottom:28px;}

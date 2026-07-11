@@ -78,6 +78,7 @@
   /* ---------- form fields ---------- */
   .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .field-grid.single{grid-template-columns:1fr;}
+  .field-full{grid-column:1 / -1;}
   .field{margin-bottom:16px;}
   .field label{display:block;font-size:.8rem;font-weight:600;color:var(--text-body);margin-bottom:6px;}
   [data-theme="dark"] .field label{color:var(--text-main);}
@@ -99,6 +100,39 @@
   .tabs-lang button.active{background:var(--accent-2);color:#fff;border-color:var(--accent-2);}
   .lang-block{display:none;}
   .lang-block.active{display:block;}
+  
+  /* ---------- image upload manager (foto tunggal & multi-gambar) ---------- */
+  .image-manager{
+    border:1px dashed var(--card-border);border-radius:var(--radius-md);padding:16px;
+    background:rgba(255,255,255,0.3);
+  }
+  [data-theme="dark"] .image-manager{background:rgba(255,255,255,0.02);}
+  .image-thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;}
+  .image-empty-hint{font-size:.78rem;color:var(--text-muted);margin:0 0 10px;}
+  .img-thumb-item{
+    position:relative;width:84px;height:84px;border-radius:12px;overflow:hidden;
+    border:1px solid var(--card-border);flex-shrink:0;
+  }
+  .img-thumb-item img{width:100%;height:100%;object-fit:cover;}
+  .img-thumb-remove{
+    position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;
+    background:rgba(0,0,0,0.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;
+  }
+  .img-thumb-remove:hover{background:#c0392b;}
+  .image-manager-controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .image-upload-btn{
+    position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:100px;
+    background:var(--accent-2);color:#fff;font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s;
+  }
+  .image-upload-btn:hover{background:var(--accent-dark);}
+  .image-upload-btn input[type="file"]{
+    position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;
+  }
+  .image-url-input{
+    flex:1;min-width:180px;padding:10px 14px;border-radius:100px;border:1px solid var(--card-border);
+    background:rgba(255,255,255,0.5);color:var(--text-body);font-size:.82rem;
+  }
+  [data-theme="dark"] .image-url-input{background:rgba(255,255,255,0.04);color:var(--text-main);}
   
   /* ---------- repeatable item cards (experience/projects/certificates/skills) ---------- */
   .item-list{display:flex;flex-direction:column;gap:16px;margin-bottom:18px;}

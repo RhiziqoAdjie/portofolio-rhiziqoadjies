@@ -13,6 +13,8 @@ function ras_getDefaultContent() {
       name_line1: "Rhiziqo Adjie",
       name_line2: "Syahputra",
       cv_path: "assets/CV - RHIZIQO ADJIE SYAHPUTRA.pdf",
+      hero_photo: "",
+      about_photo: "",
       stats: { years: 3, projects: 12, certs: 8 },
       i18n: {
         id: { ...(typeof I18N !== 'undefined' ? I18N.id : {}) },
@@ -51,6 +53,8 @@ function ras_loadContent() {
       name_line1: (saved.profile && saved.profile.name_line1) || defaults.profile.name_line1,
       name_line2: (saved.profile && saved.profile.name_line2) || defaults.profile.name_line2,
       cv_path: (saved.profile && saved.profile.cv_path) || defaults.profile.cv_path,
+      hero_photo: (saved.profile && saved.profile.hero_photo) || defaults.profile.hero_photo,
+      about_photo: (saved.profile && saved.profile.about_photo) || defaults.profile.about_photo,
       stats: Object.assign({}, defaults.profile.stats, (saved.profile && saved.profile.stats) || {}),
       i18n: {
         id: Object.assign({}, defaults.profile.i18n.id, (saved.profile && saved.profile.i18n && saved.profile.i18n.id) || {}),
@@ -92,6 +96,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cvBtn = document.querySelector('.about-frame-content a.btn[download]');
     if (cvBtn) cvBtn.setAttribute('href', CONTENT.profile.cv_path);
+
+    if (CONTENT.profile.hero_photo) {
+      const heroImg = document.querySelector('.hero-photo-zone .photo-ring img');
+      if (heroImg) heroImg.src = CONTENT.profile.hero_photo;
+    }
+    if (CONTENT.profile.about_photo) {
+      const aboutImg = document.querySelector('.about-frame-photo img');
+      if (aboutImg) aboutImg.src = CONTENT.profile.about_photo;
+    }
 
     const statNums = document.querySelectorAll('.stat-num');
     if (statNums.length >= 3) {
@@ -491,11 +504,14 @@ document.addEventListener('DOMContentLoaded', () => {
     currentCertFilter = filter;
     if (!certificateGrid || !Array.isArray(CONTENT.certificates)) return;
     const list = filter === 'all' ? CONTENT.certificates : CONTENT.certificates.filter(c => c.category === filter);
-    certificateGrid.innerHTML = list.map((c, i) => `
-      <div class="cert-card" data-aos="fade-up" data-aos-delay="${(i % 4) * 80}" data-img="${c.image}" data-title="${c.title}">
+    certificateGrid.innerHTML = list.map((c, i) => {
+      const images = (c.images && c.images.length) ? c.images : (c.image ? [c.image] : []);
+      const fallback = `https://placehold.co/600x375/dfe9d5/3a4a2a?text=${encodeURIComponent(c.title)}`;
+      return `
+      <div class="cert-card" data-aos="fade-up" data-aos-delay="${(i % 4) * 80}" data-images='${JSON.stringify(images)}' data-title="${c.title}">
         <div class="cert-thumb">
           <span class="cert-badge">${c.category || ''}</span>
-          <img src="${c.image}" alt="${c.title}" onerror="this.src='https://placehold.co/600x375/dfe9d5/3a4a2a?text=${encodeURIComponent(c.title)}'">
+          <img src="${images[0] || fallback}" alt="${c.title}" onerror="this.src='${fallback}'">
         </div>
         <div class="cert-body">
           <h3 class="cert-title">${c.title}</h3>
@@ -503,7 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <p class="cert-desc">${c.desc || ''}</p>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   if (certFilters && Array.isArray(CONTENT.certificates)) {
@@ -531,22 +548,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderCertificates();
 
-  /* lightbox */
+  /* lightbox (mendukung beberapa gambar per sertifikat) */
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightboxImg');
   const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+  let lightboxImages = [];
+  let lightboxIndex = 0;
+
+  function setLightboxImage(i) {
+    if (!lightboxImages.length) return;
+    lightboxIndex = (i + lightboxImages.length) % lightboxImages.length;
+    lightboxImg.src = lightboxImages[lightboxIndex];
+    const multi = lightboxImages.length > 1;
+    lightboxPrev.classList.toggle('hidden', !multi);
+    lightboxNext.classList.toggle('hidden', !multi);
+  }
 
   document.addEventListener('click', (e) => {
     const card = e.target.closest('.cert-card');
     if (card) {
-      lightboxImg.src = card.querySelector('img').src;
+      try {
+        lightboxImages = JSON.parse(card.getAttribute('data-images') || '[]');
+      } catch (err) {
+        lightboxImages = [];
+      }
       lightboxImg.alt = card.getAttribute('data-title') || '';
+      setLightboxImage(0);
       lightbox.classList.add('open');
     }
+    if (e.target.closest('#lightboxPrev')) setLightboxImage(lightboxIndex - 1);
+    if (e.target.closest('#lightboxNext')) setLightboxImage(lightboxIndex + 1);
   });
   lightboxClose.addEventListener('click', () => lightbox.classList.remove('open'));
   lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') lightbox.classList.remove('open');
+    if (e.key === 'ArrowLeft') setLightboxImage(lightboxIndex - 1);
+    if (e.key === 'ArrowRight') setLightboxImage(lightboxIndex + 1);
+  });
 
   /* set bahasa awal (memicu render ulang skills & certificate dengan label sesuai bahasa) */
   applyLang(currentLang);

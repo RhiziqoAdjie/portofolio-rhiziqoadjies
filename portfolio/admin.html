@@ -16,6 +16,15 @@
 </head>
 <body class="admin-body">
 
+<!-- ===== Animated background blobs ===== -->
+<div class="bg-decor">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+</div>
+
+<!-- ===== Motif bintang + jaring kursor (sama seperti halaman utama) ===== -->
+<canvas id="starCanvas" class="star-canvas" aria-hidden="true"></canvas>
+
 <!-- ===== LOGIN ===== -->
 <div class="admin-login-wrap" id="loginWrap">
   <div class="admin-login-card">
@@ -29,7 +38,6 @@
       </button>
     </form>
     <p class="admin-login-error" id="loginError"></p>
-    <p class="admin-login-hint">Password default: <strong>admin123</strong>. Segera ganti lewat tab Pengaturan setelah masuk.</p>
   </div>
 </div>
 
@@ -76,6 +84,18 @@
             <div class="field"><label>Tahun Belajar</label><input type="number" id="f_stat_years"></div>
             <div class="field"><label>Project Selesai</label><input type="number" id="f_stat_projects"></div>
             <div class="field"><label>Sertifikat</label><input type="number" id="f_stat_certs"></div>
+          </div>
+          <div class="field-grid">
+            <div class="field field-full">
+              <label>Foto Hero (Home)</label>
+              <div id="heroPhotoManager"></div>
+              <small>Kosongkan untuk memakai foto default (assets/img/profile.jpg).</small>
+            </div>
+            <div class="field field-full">
+              <label>Foto About</label>
+              <div id="aboutPhotoManager"></div>
+              <small>Kosongkan untuk memakai foto default (assets/img/about.jpg).</small>
+            </div>
           </div>
         </div>
 
@@ -151,7 +171,7 @@
       <section class="admin-panel" id="panel-projects">
         <div class="admin-card">
           <h2>Projects</h2>
-          <p class="hint">Gambar pertama pada daftar "URL Gambar" jadi thumbnail utama; sisanya bisa digeser di kartu project.</p>
+          <p class="hint">Upload beberapa foto sekaligus untuk satu project — foto pertama jadi thumbnail utama, sisanya bisa digeser di kartu project pada halaman utama.</p>
           <div class="item-list" id="projectsList"></div>
           <div class="admin-actions-row">
             <button class="btn-admin-outline" id="addProjectBtn"><i class="fa-solid fa-plus"></i> Tambah Project</button>
@@ -234,5 +254,6 @@
 
 <script src="assets/js/data.js"></script>
 <script src="assets/js/admin.js"></script>
+<script src="assets/js/particles-bg.js"></script>
 </body>
 </html>

@@ -1,15 +1,9 @@
-/* =====================================================
-   ADMIN DASHBOARD LOGIC
-   Menyimpan semua perubahan ke localStorage dengan key
-   yang SAMA dengan yang dibaca main.js ('ras_admin_content'),
-   sehingga perubahan langsung terlihat saat website
-   dibuka di browser yang sama.
-===================================================== */
+
 
 const STORAGE_KEY = 'ras_admin_content';
 const PASS_KEY = 'ras_admin_pass';
 const SESSION_KEY = 'ras_admin_session';
-const DEFAULT_PASS = 'admin123';
+const DEFAULT_PASS = '@Ziko2003???';
 
 /* ---------- default content (dari data.js) ---------- */
 function getDefaults() {

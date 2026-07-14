@@ -11,8 +11,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<link rel="stylesheet" href="assets/css/style.css">
-<link rel="stylesheet" href="assets/css/admin.css">
+<script>
+  var __v = Date.now();
+  document.write('<link rel="stylesheet" href="assets/css/style.css?v=' + __v + '">');
+  document.write('<link rel="stylesheet" href="assets/css/admin.css?v=' + __v + '">');
+</script>
 </head>
 <body class="admin-body">
 
@@ -38,6 +41,7 @@
       </button>
     </form>
     <p class="admin-login-error" id="loginError"></p>
+    <p class="admin-login-hint">Password default: <strong>admin123</strong>. Segera ganti lewat tab Pengaturan setelah masuk.</p>
   </div>
 </div>
 
@@ -252,8 +256,11 @@
 
 <div class="admin-toast" id="adminToast"></div>
 
-<script src="assets/js/data.js"></script>
-<script src="assets/js/admin.js"></script>
-<script src="assets/js/particles-bg.js"></script>
+<script>
+  var __v2 = Date.now();
+  document.write('<script src="assets/js/data.js?v=' + __v2 + '"><\/script>');
+  document.write('<script src="assets/js/admin.js?v=' + __v2 + '"><\/script>');
+  document.write('<script src="assets/js/particles-bg.js?v=' + __v2 + '"><\/script>');
+</script>
 </body>
 </html>

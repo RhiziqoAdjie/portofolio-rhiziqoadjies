@@ -43,22 +43,31 @@ const EXPERIENCE = [
 
 const PROJECTS = [
   {
-    title: "Website SNBP SMAN 8 Surabaya",
+    title: "Personal Website Rhiziqo Adjie Syahputra",
     category: "Website",
-    desc: "Platform Website untuk monitoring secara realtime Eligible SNBP pada SMAN 8 Surabaya.",
-    images: ["assets/img/projects/project-1.jpg", "assets/img/projects/project-1b.jpg"],
+    desc: "Sebuah Personal Website Portfolio Rhiziqo Adjie Syahputra.",
+    images: ["assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (1).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (2).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (3).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (4).png,", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (5).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (6)", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (7)"],
     tags: ["PHP", "MySQL", "JavaScript"],
     demo: "#",
     code: "#"
   },
   {
-    title: "Sistem Manajemen Sekolah",
-    category: "web",
-    desc: "Aplikasi berbasis web untuk mengelola data siswa, nilai, dan presensi dengan role admin, guru, dan siswa.",
-    images: ["assets/img/projects/project-2.jpg", "assets/img/projects/project-2b.jpg"],
-    tags: ["PHP", "Bootstrap", "MySQL"],
-    demo: "#",
+    title: "Website SNBP SMAN 8 Surabaya",
+    category: "Website",
+    desc: "Platform Website untuk monitoring secara realtime Eligible SNBP pada SMAN 8 Surabaya.",
+    images: ["assets/img/projects/sman8/sman1 (1).png", "assets/img/projects/sman8/sman1 (2).png", "assets/img/projects/sman8/sman1 (3).png", "assets/img/projects/sman8/sman1 (4).png", "assets/img/projects/sman8/sman1 (5).pmng"],
+    tags: ["PHP", "MySQL", "JavaScript"],
+    demo: "https://drive.google.com/drive/folders/1Dbvmkf2dsfh-BIKN7-AdToypXjCvRhZZ?hl=ID",
     code: "#"
+  },
+  {
+    title: "Portfolio Civil Engineer",
+    category: "Website",
+    desc: "Sebuah Personal Website Portfolio Civil Engineer",
+    images: ["assets/img/projects/portfolio-faiz/portfolio-faiz (1).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (2).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (3).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (4).png,", "assets/img/projects/portfolio-faiz/portfolio-faiz (5).png"],
+    tags: ["PHP", "HTML", "CSS", "Tailwind CSS", "React", "Next Js"],
+    demo: "https://faizardysyahputra.vercel.app",
+    code: "https://github.com/RhiziqoAdjie/portfolio-faizardysyahputra"
   },
   {
     title: "Landing Page Startup",
@@ -120,7 +129,7 @@ const CERTIFICATES = [
     title: "Junior Web Programming",
     issuer: "Lembaga Sertifikasi Profesi (BNSP)",
     date: "2025",
-    category: "certification",
+    category: "Certification",
     desc: "Sertifikasi penguasaan algoritma dan struktur data menggunakan JavaScript melalui proyek-proyek praktik.",
     image: "assets/img/certificates/bnsp.png"
   },
@@ -139,6 +148,14 @@ const CERTIFICATES = [
     category: "Internship",
     desc: "Program magang mengembangkan microservices dengan praktik keamanan dan pipeline CI/CD.",
     image: "assets/img/certificates/sera.png"
+  },
+  {
+    title: "Fundamental For Data Analysis",
+    issuer: "Growth Hub",
+    date: "13 Juli 2026",
+    category: "Certification",
+    desc: "Program magang mengembangkan microservices dengan praktik keamanan dan pipeline CI/CD.",
+    image: "assets/img/certificates/growthub.png"
   },
 ];
 

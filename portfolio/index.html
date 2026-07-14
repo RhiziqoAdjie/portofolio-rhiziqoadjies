@@ -17,7 +17,7 @@
 <!-- AOS animation library -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<script>document.write('<link rel="stylesheet" href="assets/css/style.css?v=' + Date.now() + '">');</script>
 </head>
 <body>
 
@@ -263,8 +263,11 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="assets/js/data.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/particles-bg.js"></script>
+<script>
+  var __v = Date.now();
+  document.write('<script src="assets/js/data.js?v=' + __v + '"><\/script>');
+  document.write('<script src="assets/js/main.js?v=' + __v + '"><\/script>');
+  document.write('<script src="assets/js/particles-bg.js?v=' + __v + '"><\/script>');
+</script>
 </body>
 </html>

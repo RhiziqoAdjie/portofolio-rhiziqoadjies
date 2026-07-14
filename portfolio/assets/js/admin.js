@@ -1,9 +1,15 @@
-
+/* =====================================================
+   ADMIN DASHBOARD LOGIC
+   Menyimpan semua perubahan ke localStorage dengan key
+   yang SAMA dengan yang dibaca main.js ('ras_admin_content'),
+   sehingga perubahan langsung terlihat saat website
+   dibuka di browser yang sama.
+===================================================== */
 
 const STORAGE_KEY = 'ras_admin_content';
 const PASS_KEY = 'ras_admin_pass';
 const SESSION_KEY = 'ras_admin_session';
-const DEFAULT_PASS = '@Ziko2003???';
+const DEFAULT_PASS = 'admin123';
 
 /* ---------- default content (dari data.js) ---------- */
 function getDefaults() {
@@ -78,10 +84,15 @@ function saveSection(key, value) {
   try {
     const raw = getRawOverride();
     raw[key] = value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(raw));
+    const payload = JSON.stringify(raw);
+    localStorage.setItem(STORAGE_KEY, payload);
     showToast('Perubahan tersimpan di browser ini.');
   } catch (e) {
-    showToast('Gagal menyimpan — kemungkinan penyimpanan browser penuh (foto terlalu besar/banyak).');
+    if (e && (e.name === 'QuotaExceededError' || e.code === 22)) {
+      showToast('Gagal menyimpan: penyimpanan browser sudah penuh. Hapus beberapa foto lama atau gunakan foto beresolusi lebih kecil, lalu coba lagi.');
+    } else {
+      showToast('Gagal menyimpan. Coba lagi.');
+    }
   }
 }
 
@@ -100,13 +111,49 @@ function showToast(msg) {
    disimpan sebagai base64 (data URL) di dalam field
    tersembunyi berformat JSON array.
 ===================================================== */
-function fileToDataUrl(file) {
+function fileToDataUrl(file, maxDim = 1600, quality = 0.82) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.naturalWidth;
+        let height = img.naturalHeight;
+
+        // Perkecil dimensi jika terlalu besar (sisi terpanjang dibatasi maxDim)
+        if (width > maxDim || height > maxDim) {
+          if (width >= height) {
+            height = Math.round(height * (maxDim / width));
+            width = maxDim;
+          } else {
+            width = Math.round(width * (maxDim / height));
+            height = maxDim;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // PNG dipertahankan (untuk transparansi), selain itu dikompres sebagai JPEG
+        const isPng = file.type === 'image/png';
+        const mime = isPng ? 'image/png' : 'image/jpeg';
+        const dataUrl = canvas.toDataURL(mime, quality);
+        resolve(dataUrl);
+      };
+      img.onerror = () => reject(new Error('Gagal memuat gambar'));
+      img.src = reader.result;
+    };
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+function estimateBase64SizeKb(str) {
+  // 1 karakter base64 ≈ 0.75 byte
+  return Math.round((str.length * 0.75) / 1024);
 }
 
 function imageManagerHtml(fieldKey, initialList, maxCount) {
@@ -137,6 +184,15 @@ function initImageManagers(root) {
     const urlInput = manager.querySelector('.image-url-input');
     const maxCount = parseInt(manager.getAttribute('data-max') || '0', 10) || null;
 
+    // Pastikan properti "multiple" benar-benar aktif di elemen input file
+    // (bukan hanya lewat atribut HTML), supaya dialog pemilihan file
+    // selalu mengizinkan pilih banyak foto sekaligus untuk Project/Certificate.
+    if (maxCount !== 1) {
+      fileInput.multiple = true;
+    } else {
+      fileInput.multiple = false;
+    }
+
     function getList() {
       try { return JSON.parse(hidden.value || '[]'); } catch (e) { return []; }
     }
@@ -158,12 +214,15 @@ function initImageManagers(root) {
     fileInput.addEventListener('change', async () => {
       const files = Array.from(fileInput.files || []);
       if (!files.length) return;
+      showToast(`Memproses ${files.length} foto...`);
       try {
-        const dataUrls = await Promise.all(files.map(fileToDataUrl));
+        const dataUrls = await Promise.all(files.map(f => fileToDataUrl(f)));
+        const totalKb = dataUrls.reduce((sum, d) => sum + estimateBase64SizeKb(d), 0);
         const list = maxCount === 1 ? dataUrls.slice(-1) : getList().concat(dataUrls);
         setList(list);
+        showToast(`${files.length} foto siap (± ${totalKb} KB setelah dikompres). Jangan lupa klik Simpan.`);
       } catch (e) {
-        showToast('Gagal membaca file gambar.');
+        showToast('Gagal membaca/mengompres file gambar.');
       }
       fileInput.value = '';
     });

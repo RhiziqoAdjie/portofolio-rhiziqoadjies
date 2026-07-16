@@ -47,16 +47,16 @@ const PROJECTS = [
     category: "Website",
     desc: "Sebuah Personal Website Portfolio Rhiziqo Adjie Syahputra.",
     images: ["assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (1).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (2).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (3).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (4).png,", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (5).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (6)", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (7)"],
-    tags: ["PHP", "MySQL", "JavaScript"],
-    demo: "#",
-    code: "#"
+    tags: ["PHP", "HTMl", "CSS", "Tailwind CSS", "Javascript"],
+    demo: "https://rhiziqoadjies.vercel.app",
+    code: "https://github.com/RhiziqoAdjie/portofolio-rhiziqoadjies"
   },
   {
     title: "Website SNBP SMAN 8 Surabaya",
     category: "Website",
     desc: "Platform Website untuk monitoring secara realtime Eligible SNBP pada SMAN 8 Surabaya.",
     images: ["assets/img/projects/sman8/sman1 (1).png", "assets/img/projects/sman8/sman1 (2).png", "assets/img/projects/sman8/sman1 (3).png", "assets/img/projects/sman8/sman1 (4).png", "assets/img/projects/sman8/sman1 (5).pmng"],
-    tags: ["PHP", "MySQL", "JavaScript"],
+    tags: ["PHP", "HTML", "MySQL", "JavaScript", "Codeigniter"],
     demo: "https://drive.google.com/drive/folders/1Dbvmkf2dsfh-BIKN7-AdToypXjCvRhZZ?hl=ID",
     code: "#"
   },

@@ -1,10 +1,3 @@
-/* =====================================================
-   ADMIN CONTENT LOADER
-   Membaca perubahan yang disimpan lewat admin.html
-   (localStorage) dan menggabungkannya dengan data
-   default dari data.js. Jika tidak ada perubahan admin,
-   website tetap tampil persis seperti data.js.
-===================================================== */
 const RAS_STORAGE_KEY = 'ras_admin_content';
 
 function ras_getDefaultContent() {
@@ -12,7 +5,7 @@ function ras_getDefaultContent() {
     profile: {
       name_line1: "Rhiziqo Adjie",
       name_line2: "Syahputra",
-      cv_path: "assets/CV - RHIZIQO ADJIE SYAHPUTRA.pdf",
+      cv_path: "assets/CV_RHIZIQO ADJIE SYAHPUTRA.pdf",
       hero_photo: "",
       about_photo: "",
       stats: { years: 3, projects: 12, certs: 8 },
@@ -83,11 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- Footer year ---------- */
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* =====================================================
-     0. TERAPKAN OVERRIDE DARI ADMIN (nama, CV, statistik,
-        info kontak, tautan sosial) SEBELUM elemen lain
-        (mis. counter statistik) mulai berjalan.
-  ===================================================== */
   function applyProfileAndContact() {
     const line1 = document.querySelector('.line-1');
     const line2 = document.querySelector('.line-2');
@@ -156,9 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* =====================================================
-     2. LANGUAGE TOGGLE (ID / EN)
-  ===================================================== */
   const langToggle = document.getElementById('langToggle');
   let currentLang = localStorage.getItem('lang') || 'id';
 
@@ -195,9 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   langToggle.textContent = currentLang.toUpperCase();
 
-  /* =====================================================
-     3. TYPING EFFECT (hero role line)
-  ===================================================== */
   let typedTimeout;
   function renderTyped(lang) {
     clearTimeout(typedTimeout);
@@ -229,12 +211,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tick();
   }
 
-  /* =====================================================
-     4. NAVBAR — active link otomatis saat scroll & klik langsung
-  ===================================================== */
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('main .section');
-  let manualLock = false; // saat user klik menu, kunci sebentar agar tidak "direbut" scrollspy di tengah animasi scroll
+  let manualLock = false; 
 
   function setActiveLink(id) {
     navLinks.forEach(link => {
@@ -256,7 +235,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // pindah aktif SEKETIKA saat diklik, tidak menunggu scroll selesai
       const targetId = link.getAttribute('href').replace('#', '');
       setActiveLink(targetId);
       manualLock = true;
@@ -277,9 +255,6 @@ document.addEventListener('DOMContentLoaded', () => {
     burger.classList.remove('open');
   }));
 
-  /* =====================================================
-     5. ANIMATED COUNTER (about stats)
-  ===================================================== */
   const counters = document.querySelectorAll('.stat-num');
   const counterObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -302,9 +277,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 30);
   }
 
-  /* =====================================================
-     6. ABOUT FRAME — tilt 3D mengikuti posisi cursor + glow
-  ===================================================== */
   const aboutFrame = document.getElementById('aboutFrame');
   if (aboutFrame) {
     const MAX_TILT = 6; // derajat
@@ -327,9 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* =====================================================
-     7. RENDER: EXPERIENCE TIMELINE (zig-zag)
-  ===================================================== */
   const timelineList = document.getElementById('timelineList');
   if (timelineList && Array.isArray(CONTENT.experience)) {
     timelineList.innerHTML = CONTENT.experience.map((item, i) => `
@@ -347,9 +316,6 @@ document.addEventListener('DOMContentLoaded', () => {
     `).join('');
   }
 
-  /* =====================================================
-     8. RENDER: PROJECTS (carousel) + FILTER
-  ===================================================== */
   const projectsGrid = document.getElementById('projectsGrid');
   const projectFilters = document.getElementById('projectFilters');
   const projPrev = document.getElementById('projPrev');
@@ -447,9 +413,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  /* =====================================================
-     9. RENDER: SKILLS (Tech Stack & Software) + FILTER
-  ===================================================== */
   const skillsGrid = document.getElementById('skillsGrid');
   const skillFilters = document.getElementById('skillFilters');
   let currentSkillFilter = 'all';
@@ -493,9 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   renderSkills();
 
-  /* =====================================================
-     10. RENDER: CERTIFICATES + FILTER + LIGHTBOX
-  ===================================================== */
   const certificateGrid = document.getElementById('certificateGrid');
   const certFilters = document.getElementById('certFilters');
   let currentCertFilter = 'all';
@@ -593,9 +553,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /* set bahasa awal (memicu render ulang skills & certificate dengan label sesuai bahasa) */
   applyLang(currentLang);
 
-  /* =====================================================
-     11. CONTACT FORM — async submit (Formspree-compatible)
-  ===================================================== */
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
 

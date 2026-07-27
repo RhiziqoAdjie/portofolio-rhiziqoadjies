@@ -1,17 +1,8 @@
-/* =====================================================
-   ADMIN DASHBOARD LOGIC
-   Menyimpan semua perubahan ke localStorage dengan key
-   yang SAMA dengan yang dibaca main.js ('ras_admin_content'),
-   sehingga perubahan langsung terlihat saat website
-   dibuka di browser yang sama.
-===================================================== */
-
 const STORAGE_KEY = 'ras_admin_content';
 const PASS_KEY = 'ras_admin_pass';
 const SESSION_KEY = 'ras_admin_session';
 const DEFAULT_PASS = 'admin123';
 
-/* ---------- default content (dari data.js) ---------- */
 function getDefaults() {
   return {
     profile: {
@@ -96,7 +87,6 @@ function saveSection(key, value) {
   }
 }
 
-/* ---------- toast ---------- */
 let toastTimeout;
 function showToast(msg) {
   const el = document.getElementById('adminToast');
@@ -106,11 +96,6 @@ function showToast(msg) {
   toastTimeout = setTimeout(() => el.classList.remove('show'), 3200);
 }
 
-/* =====================================================
-   IMAGE MANAGER — upload satu atau banyak foto,
-   disimpan sebagai base64 (data URL) di dalam field
-   tersembunyi berformat JSON array.
-===================================================== */
 function fileToDataUrl(file, maxDim = 1600, quality = 0.82) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -120,7 +105,6 @@ function fileToDataUrl(file, maxDim = 1600, quality = 0.82) {
         let width = img.naturalWidth;
         let height = img.naturalHeight;
 
-        // Perkecil dimensi jika terlalu besar (sisi terpanjang dibatasi maxDim)
         if (width > maxDim || height > maxDim) {
           if (width >= height) {
             height = Math.round(height * (maxDim / width));
@@ -137,7 +121,6 @@ function fileToDataUrl(file, maxDim = 1600, quality = 0.82) {
         const ctx = canvas.getContext('2d');
         ctx.drawImage(img, 0, 0, width, height);
 
-        // PNG dipertahankan (untuk transparansi), selain itu dikompres sebagai JPEG
         const isPng = file.type === 'image/png';
         const mime = isPng ? 'image/png' : 'image/jpeg';
         const dataUrl = canvas.toDataURL(mime, quality);
@@ -152,7 +135,7 @@ function fileToDataUrl(file, maxDim = 1600, quality = 0.82) {
 }
 
 function estimateBase64SizeKb(str) {
-  // 1 karakter base64 ≈ 0.75 byte
+
   return Math.round((str.length * 0.75) / 1024);
 }
 
@@ -184,9 +167,6 @@ function initImageManagers(root) {
     const urlInput = manager.querySelector('.image-url-input');
     const maxCount = parseInt(manager.getAttribute('data-max') || '0', 10) || null;
 
-    // Pastikan properti "multiple" benar-benar aktif di elemen input file
-    // (bukan hanya lewat atribut HTML), supaya dialog pemilihan file
-    // selalu mengizinkan pilih banyak foto sekaligus untuk Project/Certificate.
     if (maxCount !== 1) {
       fileInput.multiple = true;
     } else {
@@ -254,9 +234,6 @@ function escapeHtml(str) {
   return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-/* =====================================================
-   LOGIN
-===================================================== */
 function initLogin() {
   const loginWrap = document.getElementById('loginWrap');
   const shell = document.getElementById('adminShell');
@@ -293,9 +270,6 @@ function initLogin() {
   });
 }
 
-/* =====================================================
-   SIDEBAR TAB NAVIGATION
-===================================================== */
 function initTabs() {
   const navBtns = document.querySelectorAll('.admin-nav-btn');
   const panels = document.querySelectorAll('.admin-panel');
@@ -309,9 +283,6 @@ function initTabs() {
   });
 }
 
-/* =====================================================
-   PROFILE & ABOUT TAB
-===================================================== */
 function renderProfileTab() {
   const c = getMerged();
 
@@ -389,9 +360,6 @@ function renderProfileTab() {
   });
 }
 
-/* =====================================================
-   CONTACT TAB
-===================================================== */
 function renderContactTab() {
   const c = getMerged();
   document.getElementById('f_email').value = c.contact.email;
@@ -416,9 +384,6 @@ function renderContactTab() {
   };
 }
 
-/* =====================================================
-   GENERIC REPEATABLE LIST (experience/projects/certificates/skills)
-===================================================== */
 function fieldHtml(sectionKey, idx, field, value) {
   const id = `${sectionKey}_${idx}_${field.key}`;
 
@@ -552,9 +517,6 @@ const SKILLS_SCHEMA = [
   { key: 'color', label: 'Warna (hex)', type: 'text', placeholder: '#5fd17a' }
 ];
 
-/* =====================================================
-   PUBLISH TAB
-===================================================== */
 function initPublishTab() {
   document.getElementById('previewBtn').addEventListener('click', () => {
     window.open('index.html', '_blank');
@@ -591,9 +553,6 @@ const I18N = ${JSON.stringify(c.profile.i18n, null, 2)};
   });
 }
 
-/* =====================================================
-   SETTINGS TAB — ganti password
-===================================================== */
 function initSettingsTab() {
   document.getElementById('changePassBtn').addEventListener('click', () => {
     const current = document.getElementById('f_current_pass').value;
@@ -618,9 +577,6 @@ function initSettingsTab() {
   });
 }
 
-/* =====================================================
-   THEME (samakan dengan tema di halaman utama)
-===================================================== */
 function initTheme() {
   const root = document.documentElement;
   if (localStorage.getItem('theme') === 'dark') root.setAttribute('data-theme', 'dark');

@@ -1,9 +1,4 @@
 :root{
-    /* ---- color tokens (light) ----
-       Palet terang versi baru: latar netral hangat (bukan
-       hijau pucat merata) dengan aksen teal-emerald yang
-       lebih segar, supaya hijau hanya muncul di elemen
-       aksen/interaktif, bukan mendominasi seluruh layar. */
     --bg: #f4f3ec;
     --bg-soft: #ece9de;
     --text-main: #f7faf2;
@@ -67,8 +62,7 @@
   button{font-family:inherit;border:none;background:none;cursor:pointer;}
   
   ::selection{background:var(--accent);color:#0e140a;}
-  
-  /* ---------------- background blobs ---------------- */
+ 
   .bg-decor{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none;}
   .blob{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;}
   .blob-1{width:520px;height:520px;background:var(--accent);top:-180px;left:-150px;animation:float1 18s ease-in-out infinite;}

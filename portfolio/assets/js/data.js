@@ -57,7 +57,7 @@ const PROJECTS = [
     desc: "Platform Website untuk monitoring secara realtime Eligible SNBP pada SMAN 8 Surabaya.",
     images: ["assets/img/projects/sman8/sman1 (1).png", "assets/img/projects/sman8/sman1 (2).png", "assets/img/projects/sman8/sman1 (3).png", "assets/img/projects/sman8/sman1 (4).png", "assets/img/projects/sman8/sman1 (5).pmng"],
     tags: ["PHP", "HTML", "MySQL", "JavaScript", "Codeigniter"],
-    demo: "https://drive.google.com/drive/folders/1Dbvmkf2dsfh-BIKN7-AdToypXjCvRhZZ?hl=ID",
+    demo: "#",
     code: "#"
   },
   {
@@ -70,7 +70,7 @@ const PROJECTS = [
     code: "https://github.com/RhiziqoAdjie/portfolio-faizardysyahputra"
   },
   {
-    title: "Landing Page Startup",
+    title: "Landing Page FAS Kontraktor",
     category: "design",
     desc: "Desain dan implementasi landing page modern dengan animasi smooth scroll untuk produk SaaS.",
     images: ["assets/img/projects/project-3.jpg"],
@@ -146,7 +146,7 @@ const CERTIFICATES = [
     issuer: "PT. Serasi Autoraya",
     date: "3 Maret 2025 - 30 Juni 2025",
     category: "Internship",
-    desc: "Program magang mengembangkan microservices dengan praktik keamanan dan pipeline CI/CD.",
+    desc: "Program magang mengembangkan Data menggunakan Ms Power BI, Ms Excel, dan Spreadsheets.",
     image: "assets/img/certificates/sera.png"
   },
   {
@@ -154,7 +154,7 @@ const CERTIFICATES = [
     issuer: "Growth Hub",
     date: "13 Juli 2026",
     category: "Certification",
-    desc: "Program magang mengembangkan microservices dengan praktik keamanan dan pipeline CI/CD.",
+    desc: "Program pelatihan data analysis menggunakan berbagai tools dari Ms Excel, Ms Power BI, Tableau, Python, serta SQL.",
     image: "assets/img/certificates/growthub.png"
   },
 ];

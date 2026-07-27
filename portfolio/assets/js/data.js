@@ -70,8 +70,17 @@ const PROJECTS = [
     code: "https://github.com/RhiziqoAdjie/portfolio-faizardysyahputra"
   },
   {
+    title: "U Music",
+    category: "Desain UI/UX",
+    desc: "Platform Musik dengan berbagai macam fitur yang modern untuk memudahkan pengguna.",
+    images: ["assets/img/projects/umusic/umusic (1).png", "assets/img/projects/umusic/umusic (2).png", "assets/img/projects/umusic/umusic (3).png", "assets/img/projects/umusic/umusic (4).png"],
+    tags: ["Figma", "UI Design", "UX Experience"],
+    demo: "#",
+    code: "https://www.figma.com/design/RnDrGe3WP1lHwUYBjT4u0Y/UMusic?node-id=430-65&t=gtXeSgpkDBq7Bt7A-0"
+  },
+  {
     title: "Landing Page FAS Kontraktor",
-    category: "design",
+    category: "Website",
     desc: "Desain dan implementasi landing page modern dengan animasi smooth scroll untuk produk SaaS.",
     images: ["assets/img/projects/project-3.jpg"],
     tags: ["HTML", "CSS", "JS"],
@@ -93,15 +102,6 @@ const PROJECTS = [
     desc: "Sistem manajemen inventaris untuk melacak data produk dan perpindahan stok dengan analitik real-time.",
     images: ["assets/img/projects/project-5.jpg", "assets/img/projects/project-5b.jpg"],
     tags: ["React Js", "Laravel", "MySQL"],
-    demo: "#",
-    code: "#"
-  },
-  {
-    title: "Event Management System",
-    category: "web",
-    desc: "Platform manajemen event dan peminjaman aset kampus secara terintegrasi dan mudah digunakan.",
-    images: ["assets/img/projects/project-6.jpg", "assets/img/projects/project-6b.jpg"],
-    tags: ["Laravel", "MySQL", "Tailwind CSS"],
     demo: "#",
     code: "#"
   }

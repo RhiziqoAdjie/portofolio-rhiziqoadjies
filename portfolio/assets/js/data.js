@@ -89,7 +89,7 @@ const PROJECTS = [
   },
   {
     title: "Dashboard Analytics",
-    category: "web",
+    category: "Website",
     desc: "Dashboard interaktif untuk visualisasi data penjualan secara real-time menggunakan grafik dinamis.",
     images: ["assets/img/projects/project-4.jpg", "assets/img/projects/project-4b.jpg"],
     tags: ["JavaScript", "Chart.js", "API"],
@@ -98,7 +98,7 @@ const PROJECTS = [
   },
   {
     title: "Inventory Management System",
-    category: "web",
+    category: "Website",
     desc: "Sistem manajemen inventaris untuk melacak data produk dan perpindahan stok dengan analitik real-time.",
     images: ["assets/img/projects/project-5.jpg", "assets/img/projects/project-5b.jpg"],
     tags: ["React Js", "Laravel", "MySQL"],

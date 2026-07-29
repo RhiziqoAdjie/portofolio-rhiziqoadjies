@@ -12,12 +12,7 @@ const PROFILE = {
 const CONTACT = {
   email: "zikoadjie@gmail.com",
   phone: "+62 812-4666-5782",
-  location: "Indonesia",
-  social: {
-    linkedin: "https://linkedin.com/in/rhiziqoadjies",
-    instagram: "https://instagram.com/zikoadjie_",
-    github: "https://github.com/rhiziqoadjie"
-  }
+  location: "Indonesia"
 };
 
 /* ---------------------- EXPERIENCE / EDUCATION ---------------------- */

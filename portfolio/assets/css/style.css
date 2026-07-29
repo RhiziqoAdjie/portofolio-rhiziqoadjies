@@ -126,7 +126,7 @@
   .logo-dot{
     width:7px;height:7px;border-radius:50%;flex-shrink:0;
     background:var(--accent);box-shadow:0 0 10px var(--glow);
-    animation:logoDotPulse 1.8s ease-in-out infinite;
+    animation:logoDotPulse 2.5s ease-in-out infinite alternate;
   }
   @keyframes logoDotPulse{
     0%,100%{opacity:.45;transform:scale(.75);}

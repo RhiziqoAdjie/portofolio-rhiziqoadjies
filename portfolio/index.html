@@ -41,7 +41,7 @@
 <!-- ===== Navbar ===== -->
 <header class="navbar-wrap">
   <nav class="navbar" id="navbar">
-    <a href="#home" class="logo">RAS</a>
+    <a href="#home" class="logo">RAS<span class="logo-dot"></span></a>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link active" data-i18n="nav_home">Home</a></li>
@@ -205,23 +205,28 @@
       <div class="contact-info" data-aos="fade-right">
         <p data-i18n="contact_desc">Punya project atau ide menarik? Jangan ragu untuk menghubungi saya, saya selalu terbuka untuk diskusi maupun peluang kolaborasi baru.</p>
 
-        <div class="contact-item">
-          <i class="fa-solid fa-envelope"></i>
-          <span>zikoadjie@gmail.com</span>
-        </div>
-        <div class="contact-item">
-          <i class="fa-solid fa-phone"></i>
-          <span>+62 812-4666-5782</span>
-        </div>
-        <div class="contact-item">
-          <i class="fa-solid fa-location-dot"></i>
-          <span>Indonesia</span>
+        <div class="contact-cards">
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="0">
+            <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+            <span class="contact-card-label" data-i18n="contact_label_email">Email</span>
+            <span class="contact-card-value" id="contactEmail">zikoadjie@gmail.com</span>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="contact-card-icon"><i class="fa-solid fa-phone"></i></div>
+            <span class="contact-card-label" data-i18n="contact_label_phone">No. Telepon</span>
+            <span class="contact-card-value" id="contactPhone">+62 812-4666-5782</span>
+          </div>
+          <div class="contact-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="contact-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <span class="contact-card-label" data-i18n="contact_label_location">Lokasi</span>
+            <span class="contact-card-value" id="contactLocation">Indonesia</span>
+          </div>
         </div>
 
         <div class="contact-socials">
-          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/rhiziqoadjies" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://instagram.com/zikoadjie_" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://github.com/rhiziqoadjie" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
         </div>
       </div>
 

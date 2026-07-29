@@ -1,3 +1,26 @@
+
+const PROFILE = {
+  name_line1: "Rhiziqo Adjie",
+  name_line2: "Syahputra",
+  cv_path: "assets/CV_RHIZIQO ADJIE SYAHPUTRA.pdf",
+  hero_photo: "",
+  about_photo: "",
+  stats: { years: 3, projects: 12, certs: 8 }
+};
+
+/* -------- CONTACT -------- */
+const CONTACT = {
+  email: "zikoadjie@gmail.com",
+  phone: "+62 812-4666-5782",
+  location: "Indonesia",
+  social: {
+    linkedin: "https://linkedin.com/in/rhiziqoadjies",
+    instagram: "https://instagram.com/zikoadjie_",
+    github: "https://github.com/rhiziqoadjie"
+  }
+};
+
+/* ---------------------- EXPERIENCE / EDUCATION ---------------------- */
 const EXPERIENCE = [
   {
     year: "Aug 2023 - Des 2023",
@@ -16,20 +39,20 @@ const EXPERIENCE = [
     icon: "fa-solid fa-pen-ruler"
   },
   {
+    year: "Maret 2025 - June 2025",
+    title: "Bussiness Intelligence Intern",
+    role: "PT Serasi Autoraya",
+    desc: "Menganalisis data menggunakan SQL, Excel, atau Power BI untuk membuat laporan yang mendukung pengambilan keputusan bisnis.",
+    tags: ["Power BI", "SQL", "Excel"],
+    icon: "fa-solid fa-chart-bar"
+  },
+  {
     year: "2024 - Sekarang",
     title: "Freelance Web Developer",
     role: "Full-Stack Developer",
     desc: "Membangun website company profile, landing page, dan aplikasi web untuk klien lokal maupun internasional menggunakan HTML, CSS, JavaScript, dan PHP.",
     tags: ["PHP", "JavaScript", "MySQL"],
     icon: "fa-solid fa-laptop-code"
-  },
-  {
-  year: "Maret 2025 - June 2025",
-  title: "Bussiness Intelegence Intern",
-  role: "PT Serasi Autoraya",
-  desc: "Menganalisis data menggunakan SQL, Excel, atau Power BI untuk membuat laporan yang mendukung pengambilan keputusan bisnis.",
-  tags: ["Software Engineering", "Data Structure"],
-  icon: "fa-solid fa-graduation-cap"
   },
   {
     year: "2020 - 2024",
@@ -41,13 +64,14 @@ const EXPERIENCE = [
   }
 ];
 
+/* ------------------------------ PROJECTS ----------------------------- */
 const PROJECTS = [
   {
     title: "Personal Website Rhiziqo Adjie Syahputra",
     category: "Website",
     desc: "Sebuah Personal Website Portfolio Rhiziqo Adjie Syahputra.",
-    images: ["assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (1).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (2).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (3).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (4).png,", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (5).png", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (6)", "assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (7)"],
-    tags: ["PHP", "HTMl", "CSS", "Tailwind CSS", "Javascript"],
+    images: ["assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (1).png","assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (2).png","assets/img/projects/portfolio-rhiziqo/portfolio-rhiziqo (3).png"],
+    tags: ["PHP", "HTML", "CSS", "Tailwind CSS", "Javascript"],
     demo: "https://rhiziqoadjies.vercel.app",
     code: "https://github.com/RhiziqoAdjie/portofolio-rhiziqoadjies"
   },
@@ -55,7 +79,7 @@ const PROJECTS = [
     title: "Website SNBP SMAN 8 Surabaya",
     category: "Website",
     desc: "Platform Website untuk monitoring secara realtime Eligible SNBP pada SMAN 8 Surabaya.",
-    images: ["assets/img/projects/sman8/sman1 (1).png", "assets/img/projects/sman8/sman1 (2).png", "assets/img/projects/sman8/sman1 (3).png", "assets/img/projects/sman8/sman1 (4).png", "assets/img/projects/sman8/sman1 (5).pmng"],
+    images: ["assets/img/projects/sman8/sman1 (1).png","assets/img/projects/sman8/sman1 (2).png","assets/img/projects/sman8/sman1 (3).png"],
     tags: ["PHP", "HTML", "MySQL", "JavaScript", "Codeigniter"],
     demo: "#",
     code: "#"
@@ -63,8 +87,8 @@ const PROJECTS = [
   {
     title: "Portfolio Civil Engineer",
     category: "Website",
-    desc: "Sebuah Personal Website Portfolio Civil Engineer",
-    images: ["assets/img/projects/portfolio-faiz/portfolio-faiz (1).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (2).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (3).png", "assets/img/projects/portfolio-faiz/portfolio-faiz (4).png,", "assets/img/projects/portfolio-faiz/portfolio-faiz (5).png"],
+    desc: "Sebuah Personal Website Portfolio Civil Engineer.",
+    images: ["assets/img/projects/portfolio-faiz/portfolio-faiz (1).png","assets/img/projects/portfolio-faiz/portfolio-faiz (2).png"],
     tags: ["PHP", "HTML", "CSS", "Tailwind CSS", "React", "Next Js"],
     demo: "https://faizardysyahputra.vercel.app",
     code: "https://github.com/RhiziqoAdjie/portfolio-faizardysyahputra"
@@ -73,15 +97,15 @@ const PROJECTS = [
     title: "U Music",
     category: "Desain UI/UX",
     desc: "Platform Musik dengan berbagai macam fitur yang modern untuk memudahkan pengguna.",
-    images: ["assets/img/projects/umusic/umusic (1).png", "assets/img/projects/umusic/umusic (2).png", "assets/img/projects/umusic/umusic (3).png", "assets/img/projects/umusic/umusic (4).png"],
+    images: ["assets/img/projects/umusic/umusic (1).png","assets/img/projects/umusic/umusic (2).png","assets/img/projects/umusic/umusic (3).png"],
     tags: ["Figma", "UI Design", "UX Experience"],
     demo: "#",
-    code: "https://www.figma.com/design/RnDrGe3WP1lHwUYBjT4u0Y/UMusic?node-id=430-65&t=gtXeSgpkDBq7Bt7A-0"
+    code: "https://www.figma.com/design/RnDrGe3WP1lHwUYBjT4u0Y/UMusic?node-id=430-65"
   },
   {
     title: "Landing Page FAS Kontraktor",
     category: "Website",
-    desc: "Desain dan implementasi landing page modern dengan animasi smooth scroll untuk produk SaaS.",
+    desc: "Desain dan implementasi landing page modern dengan animasi smooth scroll.",
     images: ["assets/img/projects/project-3.jpg"],
     tags: ["HTML", "CSS", "JS"],
     demo: "#",
@@ -91,17 +115,8 @@ const PROJECTS = [
     title: "Dashboard Analytics",
     category: "Website",
     desc: "Dashboard interaktif untuk visualisasi data penjualan secara real-time menggunakan grafik dinamis.",
-    images: ["assets/img/projects/project-4.jpg", "assets/img/projects/project-4b.jpg"],
+    images: ["assets/img/projects/project-4.jpg"],
     tags: ["JavaScript", "Chart.js", "API"],
-    demo: "#",
-    code: "#"
-  },
-  {
-    title: "Inventory Management System",
-    category: "Website",
-    desc: "Sistem manajemen inventaris untuk melacak data produk dan perpindahan stok dengan analitik real-time.",
-    images: ["assets/img/projects/project-5.jpg", "assets/img/projects/project-5b.jpg"],
-    tags: ["React Js", "Laravel", "MySQL"],
     demo: "#",
     code: "#"
   }
@@ -113,39 +128,39 @@ const CERTIFICATES = [
     title: "Secure Programming With Devsecops",
     issuer: "PT Sinergi Transformasi Digital",
     date: "August 2023 - Des 2023",
-    category: "Internship",
-    desc: "Pelatihan dasar pengembangan web mencakup HTML, CSS, dan JavaScript untuk membangun halaman web interaktif.",
+    category: "internship",
+    desc: "Program magang mengembangkan aplikasi microservices dengan praktik keamanan dan pipeline CI/CD.",
     image: "assets/img/certificates/metrodata.png"
   },
   {
     title: "UI/UX Designer",
     issuer: "PT Stechoq Robotika Indonesia",
     date: "Feb 2024 - June 2024",
-    category: "Internship",
-    desc: "Sertifikasi kompetensi sebagai Front-End Web Developer dengan studi kasus pembangunan aplikasi web nyata.",
+    category: "internship",
+    desc: "Program magang merancang UI/UX aplikasi web, mulai dari wireframe hingga prototipe interaktif.",
     image: "assets/img/certificates/stechoq.png"
   },
   {
     title: "Junior Web Programming",
     issuer: "Lembaga Sertifikasi Profesi (BNSP)",
     date: "2025",
-    category: "Certification",
-    desc: "Sertifikasi penguasaan algoritma dan struktur data menggunakan JavaScript melalui proyek-proyek praktik.",
+    category: "certification",
+    desc: "Sertifikasi kompetensi Junior Web Programming dari BNSP.",
     image: "assets/img/certificates/bnsp.png"
   },
   {
     title: "Toefl ITP",
     issuer: "English Vit",
     date: "2026",
-    category: "Training",
-    desc: "Sertifikasi desain web responsif: flexbox, grid, dan praktik terbaik tata letak lintas perangkat.",
+    category: "training",
+    desc: "Pelatihan dan sertifikasi TOEFL ITP untuk kompetensi bahasa Inggris.",
     image: "assets/img/certificates/toefl.png"
   },
   {
     title: "Bussiness Intelligence",
     issuer: "PT. Serasi Autoraya",
     date: "3 Maret 2025 - 30 Juni 2025",
-    category: "Internship",
+    category: "internship",
     desc: "Program magang mengembangkan Data menggunakan Ms Power BI, Ms Excel, dan Spreadsheets.",
     image: "assets/img/certificates/sera.png"
   },
@@ -153,12 +168,13 @@ const CERTIFICATES = [
     title: "Fundamental For Data Analysis",
     issuer: "Growth Hub",
     date: "13 Juli 2026",
-    category: "Certification",
-    desc: "Program pelatihan data analysis menggunakan berbagai tools dari Ms Excel, Ms Power BI, Tableau, Python, serta SQL.",
+    category: "certification",
+    desc: "Program pelatihan data analysis menggunakan Ms Excel, Ms Power BI, Tableau, Python, serta SQL.",
     image: "assets/img/certificates/growthub.png"
-  },
+  }
 ];
 
+/* ------------------------------- SKILLS ------------------------------- */
 const SKILLS = [
   { name: "HTML5",        icon: "fa-brands fa-html5",      level: "expert",       category: "programming", color: "#E34F26" },
   { name: "CSS3",         icon: "fa-brands fa-css3-alt",    level: "expert",       category: "programming", color: "#1572B6" },
@@ -169,69 +185,146 @@ const SKILLS = [
   { name: "MySQL",        icon: "fa-solid fa-database",     level: "advanced",     category: "programming", color: "#4479A1" },
   { name: "Python",       icon: "fa-brands fa-python",      level: "beginner",     category: "programming", color: "#3776AB" },
   { name: "TypeScript",   icon: "fa-solid fa-code",         level: "intermediate", category: "programming", color: "#3178C6" },
-  { name: "Figma",        icon: "fa-brands fa-figma",       level: "advanced",     category: "software", color: "#F24E1E" },
-  { name: "VS Code",      icon: "fa-solid fa-laptop-code",  level: "expert",       category: "software", color: "#007ACC" },
-  { name: "Git & GitHub", icon: "fa-brands fa-git-alt",     level: "advanced",     category: "software", color: "#F05032" },
-  { name: "Adobe XD",     icon: "fa-brands fa-adobe",       level: "intermediate", category: "software", color: "#FF61F6" },
-  { name: "Docker",       icon: "fa-brands fa-docker",      level: "intermediate", category: "software", color: "#2496ED" }
+  { name: "Figma",        icon: "fa-brands fa-figma",       level: "advanced",     category: "software",    color: "#F24E1E" },
+  { name: "VS Code",      icon: "fa-solid fa-laptop-code",  level: "expert",       category: "software",    color: "#007ACC" },
+  { name: "Git & GitHub", icon: "fa-brands fa-git-alt",     level: "advanced",     category: "software",    color: "#F05032" },
+  { name: "Adobe XD",     icon: "fa-brands fa-adobe",       level: "intermediate", category: "software",    color: "#FF61F6" },
+  { name: "Docker",       icon: "fa-brands fa-docker",      level: "intermediate", category: "software",    color: "#2496ED" }
 ];
 
-/* --------------------------------- I18N ------------------------------- */
 const I18N = {
   id: {
+    /* --- navbar --- */
     nav_home: "Home", nav_about: "About", nav_experience: "Experience",
     nav_projects: "Projects", nav_certificate: "Certificate", nav_contact: "Contact",
+    /* --- hero --- */
     hero_greeting: "Halo, saya",
-    hero_we: "We are",
+    hero_we: "Saya adalah seorang",
     hero_desc: "Saya membangun solusi digital yang modern, responsif dan user-friendly. Fokus pada kualitas, performa, dan pengalaman pengguna terbaik.",
     hero_btn_project: "Lihat Project",
     hero_btn_contact: "Hubungi Saya",
-    about_eyebrow: "Kenali Saya", about_title: "Tentang Saya",
-    about_stat1: "Tahun Belajar", about_stat2: "Project Selesai", about_stat3: "Sertifikat",
+    /* --- about --- */
+    about_eyebrow: "Kenali Saya",
+    about_title: "Tentang Saya",
+    about_stat1: "Tahun Belajar",
+    about_stat2: "Project Selesai",
+    about_stat3: "Sertifikat",
     about_p1: "Saya adalah seorang pengembang web yang bersemangat dalam menciptakan pengalaman digital yang bersih, fungsional, dan berdampak. Lulusan dengan dasar kuat di bidang ilmu komputer, saya senang menerjemahkan ide menjadi produk nyata yang bisa digunakan banyak orang.",
     about_p2: "Selain menulis kode, saya tertarik dengan desain antarmuka, optimasi performa, dan terus belajar teknologi baru. Saat ini saya fokus memperdalam ekosistem JavaScript modern dan praktik UI/UX yang baik.",
     about_btn_cv: "Unduh CV",
-    skills_eyebrow: "Kemampuan", skills_title: "Tech Stack & Software",
-    filter_all: "Semua", filter_programming: "Programming", filter_software: "Software",
-    level_beginner: "Beginner", level_intermediate: "Intermediate", level_advanced: "Advanced", level_expert: "Expert",
-    exp_eyebrow: "Perjalanan", exp_title: "Experience & Education",
-    proj_eyebrow: "Karya Saya", proj_title: "Projects",
-    cert_eyebrow: "Pencapaian", cert_title: "Certificate",
-    cert_filter_all: "All Certificate", cert_filter_internship: "Internship", cert_filter_training: "Training", cert_filter_certification: "Sertifikasi",
-    contact_eyebrow: "Mari Terhubung", contact_title: "Hubungi Saya",
+    /* --- skills --- */
+    skills_eyebrow: "Kemampuan",
+    skills_title: "Tech Stack & Software",
+    filter_all: "Semua",
+    filter_programming: "Programming",
+    filter_software: "Software",
+    level_beginner: "Beginner",
+    level_intermediate: "Intermediate",
+    level_advanced: "Advanced",
+    level_expert: "Expert",
+    /* --- experience --- */
+    exp_eyebrow: "Perjalanan",
+    exp_title: "Experience & Education",
+    /* --- projects --- */
+    proj_eyebrow: "Karya Saya",
+    proj_title: "Projects",
+    proj_filter_all: "Semua",
+    proj_link_demo: "Demo",
+    proj_link_code: "Kode",
+    /* --- certificate --- */
+    cert_eyebrow: "Pencapaian",
+    cert_title: "Certificate",
+    cert_filter_all: "Semua Sertifikat",
+    cert_filter_internship: "Internship",
+    cert_filter_training: "Training",
+    cert_filter_certification: "Sertifikasi",
+    /* --- contact --- */
+    contact_eyebrow: "Mari Terhubung",
+    contact_title: "Hubungi Saya",
     contact_desc: "Punya project atau ide menarik? Jangan ragu untuk menghubungi saya, saya selalu terbuka untuk diskusi maupun peluang kolaborasi baru.",
-    form_name: "Nama Anda", form_email: "Email Anda", form_subject: "Subjek", form_message: "Pesan Anda",
+    contact_label_email: "Email",
+    contact_label_phone: "No. Telepon",
+    contact_label_location: "Lokasi",
+    /* --- form --- */
+    form_name: "Nama Anda",
+    form_email: "Email Anda",
+    form_subject: "Subjek",
+    form_message: "Pesan Anda",
     form_submit: "Kirim Pesan",
+    form_sending: "Mengirim...",
+    form_success: "Pesan berhasil terkirim. Terima kasih!",
+    form_error: "Terjadi kesalahan, coba lagi nanti.",
+    form_not_connected: "Form belum terhubung ke layanan email.",
+    /* --- footer --- */
     footer_rights: "Seluruh hak cipta dilindungi.",
-    filter_web: "Web", filter_design: "Desain",
+    /* --- typed roles --- */
     typed_roles: ["Web Development", "Data Analyst", "UI/UX Designer"]
   },
   en: {
+    /* --- navbar --- */
     nav_home: "Home", nav_about: "About", nav_experience: "Experience",
     nav_projects: "Projects", nav_certificate: "Certificate", nav_contact: "Contact",
+    /* --- hero --- */
     hero_greeting: "Hello, I'm",
     hero_we: "I am a",
     hero_desc: "I build modern, responsive, and user-friendly digital solutions. Focused on quality, performance, and the best user experience.",
     hero_btn_project: "View Projects",
     hero_btn_contact: "Contact Me",
-    about_eyebrow: "Get To Know Me", about_title: "About Me",
-    about_stat1: "Years Learning", about_stat2: "Projects Done", about_stat3: "Certificates",
+    /* --- about --- */
+    about_eyebrow: "Get To Know Me",
+    about_title: "About Me",
+    about_stat1: "Years Learning",
+    about_stat2: "Projects Done",
+    about_stat3: "Certificates",
     about_p1: "I'm a web developer passionate about creating clean, functional, and impactful digital experiences. With a strong computer science background, I enjoy turning ideas into real products people can use.",
     about_p2: "Besides writing code, I'm interested in interface design, performance optimization, and constantly learning new technologies. I'm currently deepening my knowledge of modern JavaScript and good UI/UX practices.",
     about_btn_cv: "Download CV",
-    skills_eyebrow: "Capabilities", skills_title: "Tech Stack & Software",
-    filter_all: "All", filter_programming: "Programming", filter_software: "Software",
-    level_beginner: "Beginner", level_intermediate: "Intermediate", level_advanced: "Advanced", level_expert: "Expert",
-    exp_eyebrow: "My Journey", exp_title: "Experience & Education",
-    proj_eyebrow: "My Work", proj_title: "Projects",
-    cert_eyebrow: "Achievements", cert_title: "Certificate",
-    cert_filter_all: "All Certificate", cert_filter_internship: "Internship", cert_filter_training: "Training", cert_filter_certification: "Certification",
-    contact_eyebrow: "Let's Connect", contact_title: "Contact Me",
+    /* --- skills --- */
+    skills_eyebrow: "Capabilities",
+    skills_title: "Tech Stack & Software",
+    filter_all: "All",
+    filter_programming: "Programming",
+    filter_software: "Software",
+    level_beginner: "Beginner",
+    level_intermediate: "Intermediate",
+    level_advanced: "Advanced",
+    level_expert: "Expert",
+    /* --- experience --- */
+    exp_eyebrow: "My Journey",
+    exp_title: "Experience & Education",
+    /* --- projects --- */
+    proj_eyebrow: "My Work",
+    proj_title: "Projects",
+    proj_filter_all: "All",
+    proj_link_demo: "Demo",
+    proj_link_code: "Code",
+    /* --- certificate --- */
+    cert_eyebrow: "Achievements",
+    cert_title: "Certificate",
+    cert_filter_all: "All Certificates",
+    cert_filter_internship: "Internship",
+    cert_filter_training: "Training",
+    cert_filter_certification: "Certification",
+    /* --- contact --- */
+    contact_eyebrow: "Let's Connect",
+    contact_title: "Contact Me",
     contact_desc: "Have a project or an interesting idea? Feel free to reach out — I'm always open to discussion and new collaboration opportunities.",
-    form_name: "Your Name", form_email: "Your Email", form_subject: "Subject", form_message: "Your Message",
+    contact_label_email: "Email",
+    contact_label_phone: "Phone Number",
+    contact_label_location: "Location",
+    /* --- form --- */
+    form_name: "Your Name",
+    form_email: "Your Email",
+    form_subject: "Subject",
+    form_message: "Your Message",
     form_submit: "Send Message",
+    form_sending: "Sending...",
+    form_success: "Message sent successfully. Thank you!",
+    form_error: "An error occurred, please try again later.",
+    form_not_connected: "Form is not connected to email service.",
+    /* --- footer --- */
     footer_rights: "All rights reserved.",
-    filter_web: "Web", filter_design: "Design",
+    /* --- typed roles --- */
     typed_roles: ["Web Development", "Data Analyst", "UI/UX Designer"]
   }
 };

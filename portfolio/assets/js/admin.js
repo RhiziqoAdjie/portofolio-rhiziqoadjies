@@ -524,7 +524,26 @@ function initPublishTab() {
 
   document.getElementById('downloadDataJsBtn').addEventListener('click', () => {
     const c = getMerged();
-    const out = `const EXPERIENCE = ${JSON.stringify(c.experience, null, 2)};
+
+    /* Buat PROFILE object dari data admin */
+    const profileExport = {
+      name_line1: c.profile.name_line1,
+      name_line2: c.profile.name_line2,
+      cv_path: c.profile.cv_path,
+      hero_photo: c.profile.hero_photo || '',
+      about_photo: c.profile.about_photo || '',
+      stats: c.profile.stats
+    };
+
+    const out = `/* ====================================================================
+   DATA.JS — Di-generate otomatis dari Admin Dashboard.
+   ==================================================================== */
+
+const PROFILE = ${JSON.stringify(profileExport, null, 2)};
+
+const CONTACT = ${JSON.stringify(c.contact, null, 2)};
+
+const EXPERIENCE = ${JSON.stringify(c.experience, null, 2)};
 
 const PROJECTS = ${JSON.stringify(c.projects, null, 2)};
 
@@ -537,11 +556,9 @@ const I18N = ${JSON.stringify(c.profile.i18n, null, 2)};
     const blob = new Blob([out], { type: 'text/javascript' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.js';
-    a.click();
+    a.href = url; a.download = 'data.js'; a.click();
     URL.revokeObjectURL(url);
-    showToast('data.js berhasil diunduh.');
+    showToast('data.js berhasil diunduh. Replace file lama di project kamu lalu git push.');
   });
 
   document.getElementById('resetBtn').addEventListener('click', () => {

@@ -1,14 +1,10 @@
-/* =====================================================
-   ADMIN DASHBOARD — menggunakan variabel warna dari
-   style.css (root sudah dimuat lebih dulu di admin.html)
-===================================================== */
+
 
 .admin-body{
     min-height:100vh;
     padding-bottom:60px;
   }
   
-  /* ---------- topbar ---------- */
   .admin-topbar{
     display:flex;align-items:center;justify-content:space-between;
     padding:16px 28px;background:var(--nav-bg);backdrop-filter:blur(18px);
@@ -46,6 +42,23 @@
   .admin-login-card .btn-admin-primary{width:100%;justify-content:center;}
   .admin-login-error{color:#c0392b;font-size:.82rem;margin-top:10px;min-height:1.2em;}
   .admin-login-hint{font-size:.72rem;color:var(--text-muted);margin-top:18px;line-height:1.6;}
+
+  .btn-lupa-password {
+    font-size: 13px;
+    font-weight: 400;                
+    color: #6c757d;       
+    text-decoration: none;         
+    font-family: sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;                       /* Jarak antara ikon dan teks */
+  }
+  
+  /* Efek saat tombol disentuh kursor */
+  .btn-lupa-password:hover {
+    color: #bcbcbc;                 /* Berubah menjadi warna biru */
+    text-decoration: underline;     /* Muncul garis bawah saat di-hover */
+  }
   
   /* ---------- shell layout ---------- */
   .admin-shell{display:none;max-width:1280px;margin:0 auto;padding:28px 24px;gap:26px;grid-template-columns:220px 1fr;}

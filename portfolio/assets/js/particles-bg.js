@@ -18,26 +18,26 @@
     if (isDark) {
       return isMobile
         ? {
-            star: '150,235,175',   // hijau tetap ada tapi lebih redup di mobile
-            line: '95,200,125',
-            cursor: '130,235,160',
+            star: '120,200,255',
+            line: '56,189,248',
+            cursor: '56,189,248',
             starGlow: 10,
             lineGlowBoost: 1.05,
             baseAlpha: 0.4
           }
         : {
-            star: '180,255,200',   // hijau cerah menyala (desktop)
-            line: '120,235,150',
-            cursor: '150,255,180',
+            star: '160,220,255',   // navy/cyan cerah menyala (desktop)
+            line: '56,189,248',
+            cursor: '100,200,255',
             starGlow: 14,
             lineGlowBoost: 1.3,
             baseAlpha: 0.55
           };
     }
     return {
-      star: '46,90,38',      // hijau tua pekat, tetap kontras di bg terang
-      line: '58,110,46',
-      cursor: '46,90,38',
+      star: '30,64,175',      // navy pekat, kontras di bg terang
+      line: '37,99,235',
+      cursor: '29,78,216',
       starGlow: 9,
       lineGlowBoost: 1,
       baseAlpha: 0.55

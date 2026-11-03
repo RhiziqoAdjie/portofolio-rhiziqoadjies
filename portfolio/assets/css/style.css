@@ -1,17 +1,17 @@
 :root{
-    --bg: #f4f3ec;
-    --bg-soft: #ece9de;
-    --text-main: #f7faf2;
-    --text-body: #55605a;
-    --text-muted: #83897f;
-    --accent: #35b07f;
-    --accent-2: #2c8562;
-    --accent-dark: #235f47;
-    --card-bg: rgba(255,255,255,0.62);
-    --card-border: rgba(255,255,255,0.8);
-    --glow: rgba(53,176,127,0.45);
-    --nav-bg: rgba(255,255,255,0.62);
-    --hero-heading: #26302a;     
+    --bg: #f2f5f9;
+    --bg-soft: #e5ebf4;
+    --text-main: #0c1424;
+    --text-body: #475569;
+    --text-muted: #64748b;
+    --accent: #3478ff;
+    --accent-2: #2563eb;
+    --accent-dark: #1d4ed8;
+    --card-bg: rgba(255,255,255,0.7);
+    --card-border: rgba(52,120,255,0.18);
+    --glow: rgba(52,120,255,0.35);
+    --nav-bg: rgba(255,255,255,0.7);
+    --hero-heading: #0f172a;     
   
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -23,16 +23,29 @@
   }
   
   [data-theme="dark"]{
-    --bg: #0e140a;
-    --bg-soft: #131c0c;
-    --text-main: #f3f7ee;
-    --text-body: #b9c4ad;
-    --text-muted: #7e8c72;
-    --accent: #6fe389;
-    --accent-2: #5fd17a;
-    --accent-dark: #2f4a26;
-    --card-bg: rgba(255,255,255,0.04);
-    --card-border: rgba(255,255,255,0.08);
+    --bg: #040812;
+    --bg-soft: #080f20;
+    --text-main: #f8fafc;
+    --text-body: #94a3b8;
+    --text-muted: #64748b;
+    --accent: #38bdf8;
+    --accent-2: #3478ff;
+    --accent-dark: #1d4ed8;
+    --card-bg: rgba(8,15,32,0.65);
+    --card-border: rgba(56,189,248,0.14);
+    --glow: rgba(52,120,255,0.45);
+    --nav-bg: rgba(4,8,18,0.72);
+    --hero-heading: #f8fafc;       
+  }
+  
+  @media (max-width:700px){
+    [data-theme="dark"]{
+      --bg: #03060e;
+      --bg-soft: #060b18;
+      --card-bg: rgba(8,15,32,0.6);
+    }
+    [data-theme="dark"] .blob{opacity:.22;}
+  }
     --glow: rgba(111,227,137,0.35);
     --nav-bg: rgba(20,28,14,0.6);
     --hero-heading: #f3f7ee;       
@@ -250,34 +263,198 @@
   [data-theme="dark"] .btn-outline:hover{color:var(--accent);}
   .btn.full{width:100%;justify-content:center;}
   
-  /* ---- foto hero: zona lebih besar agar "mendekat" terasa lebih cepat ---- */
-  .hero-photo-zone{padding:34px;flex-shrink:0;}
-  .hero-photo{position:relative;width:420px;height:420px;}
-  .photo-ring{
-    width:100%;height:100%;border-radius:50%;overflow:hidden;position:relative;z-index:2;
-    border:4px solid rgba(255,255,255,0.5);
-    transition:transform .5s cubic-bezier(.4,0,.2,1), filter .5s ease;
+  /* ---- PRELOADER SCREEN ---- */
+  .site-preloader{
+    position:fixed;inset:0;z-index:99999;
+    background:#080c0a;
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .6s cubic-bezier(.4,0,.2,1), visibility .6s;
+    overflow:hidden;
   }
-  .photo-ring img{width:100%;height:100%;object-fit:cover;}
-  .hero-photo-zone:hover .photo-ring{
-    transform:scale(1.06);
-    filter:saturate(1.35) brightness(1.1);
-    box-shadow:0 0 50px var(--glow);
+  .site-preloader::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 50%, rgba(52,120,255,0.22), transparent 60%);
+    pointer-events:none;
   }
-  .ring-glow{
-    position:absolute;inset:-14px;border-radius:50%;z-index:1;
-    background:radial-gradient(circle, transparent 60%, var(--glow) 100%);
-    filter:blur(10px);animation:pulseGlow 4s ease-in-out infinite;
-    transition:opacity .5s, transform .5s;
+  .site-preloader.fade-out{
+    opacity:0;visibility:hidden;pointer-events:none;
   }
-  .hero-photo-zone:hover .ring-glow{opacity:1;transform:scale(1.15);}
-  @keyframes pulseGlow{0%,100%{opacity:.6;transform:scale(1);}50%{opacity:1;transform:scale(1.03);}}
-  .ring-particle{position:absolute;border-radius:50%;background:var(--accent);opacity:.7;}
-  .p1{width:14px;height:14px;top:8%;right:4%;animation:orbit1 7s linear infinite;}
-  .p2{width:10px;height:10px;bottom:10%;left:0%;animation:orbit2 9s linear infinite;}
-  .p3{width:8px;height:8px;top:46%;right:-3%;animation:orbit1 11s linear infinite reverse;}
-  @keyframes orbit1{0%{transform:translate(0,0);}50%{transform:translate(14px,-18px);}100%{transform:translate(0,0);}}
-  @keyframes orbit2{0%{transform:translate(0,0);}50%{transform:translate(-12px,16px);}100%{transform:translate(0,0);}}
+  .preloader-inner{
+    position:relative;z-index:2;
+    display:flex;flex-direction:column;align-items:center;
+    max-width:380px;width:90%;
+    text-align:center;font-family:'Space Grotesk',sans-serif;
+  }
+  .preloader-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(52,120,255,0.12);
+    border:1px solid rgba(56,189,248,0.3);
+    color:#60a5fa;font-size:0.75rem;letter-spacing:2px;font-weight:600;
+    margin-bottom:18px;
+  }
+  .badge-dot{
+    width:7px;height:7px;border-radius:50%;background:#38bdf8;
+    box-shadow:0 0 10px #38bdf8;animation:pulseDot 1.4s infinite ease-in-out;
+  }
+  @keyframes pulseDot{0%,100%{opacity:.4;transform:scale(.8);}50%{opacity:1;transform:scale(1.2);}}
+  .preloader-counter{
+    font-size:clamp(3.8rem,9vw,6rem);
+    font-weight:700;line-height:1;
+    color:#ffffff;letter-spacing:-2px;
+    margin-bottom:18px;
+    text-shadow:0 0 40px rgba(52,120,255,0.45);
+  }
+  .preloader-pct{
+    font-size:clamp(2rem,5vw,3rem);
+    color:var(--accent);margin-left:4px;font-weight:500;
+  }
+  .preloader-bar{
+    width:100%;height:4px;
+    background:rgba(255,255,255,0.08);border-radius:4px;
+    overflow:hidden;position:relative;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .preloader-bar-fill{
+    width:0%;height:100%;
+    background:linear-gradient(90deg, #1e3a8a, var(--accent), #93c5fd);
+    border-radius:4px;
+    box-shadow:0 0 16px var(--accent);
+    transition:width .15s ease-out;
+  }
+  .preloader-status{
+    margin-top:16px;font-size:0.85rem;color:rgba(255,255,255,0.65);
+    font-family:'Inter',sans-serif;letter-spacing:0.5px;
+  }
+  .status-cursor{color:var(--accent);font-weight:700;margin-right:4px;}
+
+  /* ---- LANYARD RIG & 3D INTERACTIVE CARD (ALFARI STYLE) ---- */
+  .hero-photo-zone{
+    padding:0;flex-shrink:0;
+    perspective:1400px;
+    display:flex;justify-content:center;align-items:flex-start;
+    position:relative;
+    width:360px;height:500px;
+  }
+  .lanyard-rig{
+    position:relative;
+    width:100%;height:100%;
+    display:flex;flex-direction:column;align-items:center;
+    pointer-events:none;
+  }
+  .lanyard-rope-svg{
+    position:absolute;
+    top:-150px;left:0;
+    width:100%;height:310px;
+    pointer-events:none;
+    overflow:visible;
+    z-index:2;
+  }
+  .lanyard-metal-clip{
+    position:absolute;
+    top:108px;left:50%;
+    margin-left:-16px;
+    display:flex;flex-direction:column;align-items:center;
+    z-index:10;
+    pointer-events:none;
+    transform-origin:50% 0;
+  }
+  .lanyard-clip-body{
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .clip-loop{
+    width:32px;height:12px;
+    background:linear-gradient(90deg, #182538 0%, #3a4d6b 50%, #182538 100%);
+    border-radius:3px;
+    border:1px solid #48658a;
+    box-shadow:0 2px 5px rgba(0,0,0,0.8);
+  }
+  .clip-rivet{
+    width:16px;height:18px;
+    background:radial-gradient(circle at 35% 35%, #94a3b8, #334155);
+    border-radius:3px 3px 6px 6px;
+    border:1.5px solid #64748b;
+    margin-top:-2px;
+    box-shadow:0 3px 6px rgba(0,0,0,0.6);
+  }
+
+  .id-card-wrapper{
+    position:absolute;
+    top:100px;left:50%;
+    margin-left:-145px;
+    width:290px;height:435px;
+    perspective:1400px;
+    cursor:grab;
+    user-select:none;
+    -webkit-user-select:none;
+    touch-action:none;
+    pointer-events:auto;
+    outline:none;
+    transform-origin:50% 0px;
+    transition:box-shadow .2s;
+    z-index:5;
+  }
+  .id-card-wrapper:active{
+    cursor:grabbing;
+  }
+  .id-card-inner{
+    width:100%;height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform .65s cubic-bezier(.34,1.4,.64,1);
+    box-shadow:0 24px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.25);
+    border-radius:18px;
+  }
+  .id-card-wrapper.flipped .id-card-inner{
+    transform:rotateY(180deg);
+  }
+
+  .id-card-face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    -webkit-backface-visibility:hidden;
+    border-radius:18px;
+    overflow:hidden;
+    background:#080d12;
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .card-art-img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    pointer-events:none;
+  }
+
+  .id-card-front{
+    transform:rotateY(0deg);
+  }
+  .id-card-back{
+    transform:rotateY(180deg);
+  }
+  .card-direct-link{
+    position:absolute;
+    left:20px;right:20px;bottom:20px;
+    height:70px;
+    display:block;
+    border-radius:12px;
+    z-index:5;
+    cursor:pointer;
+  }
+
+  /* Efek silau/cahaya lampu lembut mengikuti gerakan kursor */
+  .card-glare{
+    position:absolute;inset:0;
+    pointer-events:none;
+    opacity:0;
+    mix-blend-mode:overlay;
+    background:radial-gradient(circle 240px at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,0.45) 0%, rgba(56,189,248,0.2) 35%, transparent 70%);
+    transition:opacity .3s ease;
+    z-index:6;
+    border-radius:inherit;
+  }
+  .id-card-wrapper:hover .card-glare{
+    opacity:1;
+  }
   
   .scroll-cue{
     position:absolute;bottom:30px;left:50%;transform:translateX(-50%);

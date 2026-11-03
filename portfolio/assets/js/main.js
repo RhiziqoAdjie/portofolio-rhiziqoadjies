@@ -559,4 +559,236 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applyLang(currentLang);
 
+  /* ================= PRELOADER SCRIPT ================= */
+  const preloader = document.getElementById('sitePreloader');
+  const preloaderNum = document.getElementById('preloaderNum');
+  const preloaderBar = document.getElementById('preloaderBar');
+  const preloaderStatus = document.getElementById('preloaderStatus');
+
+  if (preloader) {
+    let progress = 0;
+    const phrases = [
+      'Loading assets & shaders...',
+      'Compiling 3D scene...',
+      'Binding interactive physics...',
+      'Ready!'
+    ];
+
+    const timer = setInterval(() => {
+      progress += Math.floor(Math.random() * 8) + 4;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(timer);
+        if (preloaderNum) preloaderNum.textContent = '100';
+        if (preloaderBar) preloaderBar.style.width = '100%';
+        if (preloaderStatus) preloaderStatus.textContent = phrases[3];
+
+        setTimeout(() => {
+          preloader.classList.add('fade-out');
+          setTimeout(() => preloader.remove(), 700);
+        }, 400);
+      } else {
+        if (preloaderNum) preloaderNum.textContent = String(progress);
+        if (preloaderBar) preloaderBar.style.width = `${progress}%`;
+        const phraseIdx = Math.min(Math.floor((progress / 100) * (phrases.length - 1)), phrases.length - 2);
+        if (preloaderStatus) preloaderStatus.textContent = phrases[phraseIdx];
+      }
+    }, 45);
+  }
+
+  /* ================= 3D INTERACTIVE LANYARD SPRING PHYSICS (ALFARI STYLE) ================= */
+  const idCard = document.getElementById('idCardWrapper');
+  const lanyardRig = document.getElementById('lanyardRig');
+  const ropePath = document.getElementById('lanyardRopePath');
+  const ropeHighlight = document.getElementById('lanyardRopePathHighlight');
+  const clipEl = document.getElementById('lanyardClip');
+
+  if (idCard) {
+    let cardX = 0, cardY = 0;
+    let targetX = 0, targetY = 0;
+    let vx = 0, vy = 0;
+    let rotZ = 0, rotX = 0, rotY = 0;
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0;
+    let hasDragged = false;
+    let idleAngle = 0;
+    let hoverOffsetX = 0, hoverOffsetY = 0;
+    let hoverRotX = 0, hoverRotY = 0;
+
+    // Anchor point tali di paling atas menuju navbar / viewport
+    // Koordinat SVG viewBox 0 0 1000 800 (SVG height 310px, top -150px, hook di top 100px + 16px = 116px)
+    function updateRope() {
+      const scaleX = 1000 / 360;
+      const scaleY = 800 / 310;
+      
+      const anchorSvgX = 500;
+      const anchorSvgY = 0; // puncak atas viewport
+      
+      const hookSvgX = 500 + (cardX * scaleX);
+      const hookSvgY = (116 + 150 + cardY) * scaleY;
+
+      // Kurva Bézier alami fleksibel
+      const ctrlSvgX = 500 + (cardX * scaleX * 0.25);
+      const ctrlSvgY = hookSvgY * 0.45;
+      const d = `M ${anchorSvgX} ${anchorSvgY} Q ${ctrlSvgX} ${ctrlSvgY} ${hookSvgX} ${hookSvgY}`;
+
+      if (ropePath) ropePath.setAttribute('d', d);
+      if (ropeHighlight) ropeHighlight.setAttribute('d', d);
+
+      // Posisi simpul tali pengait: menempel tepat di lubang plong kartu
+      if (clipEl) {
+        clipEl.style.transform = `translate3d(${cardX}px, ${cardY}px, 0) rotate(${rotZ * 0.85}deg)`;
+      }
+    }
+
+    // Gerakan kursor di sekitar kartu: kartu sensitif merespons kursor + cahaya glare
+    const heroZone = document.querySelector('.hero-photo-zone');
+    const glareFront = document.getElementById('cardGlareFront');
+    const glareBack = document.getElementById('cardGlareBack');
+
+    if (heroZone) {
+      heroZone.addEventListener('mousemove', (e) => {
+        if (isDragging) return;
+        const rect = idCard.getBoundingClientRect();
+        const mouseX = e.clientX - (rect.left + rect.width / 2);
+        const mouseY = e.clientY - (rect.top + rect.height / 2);
+
+        // Sensitif kursor: bergeser dan berotasi halus mengikuti arah kursor
+        hoverOffsetX = (mouseX / (rect.width / 2)) * 14;
+        hoverOffsetY = (mouseY / (rect.height / 2)) * 10;
+        hoverRotY = (mouseX / (rect.width / 2)) * 12;
+        hoverRotX = -(mouseY / (rect.height / 2)) * 10;
+
+        // Posisi pantulan cahaya lampu (glare) mengikuti kursor
+        const gx = ((e.clientX - rect.left) / rect.width) * 100;
+        const gy = ((e.clientY - rect.top) / rect.height) * 100;
+        if (glareFront) {
+          glareFront.style.setProperty('--gx', `${gx}%`);
+          glareFront.style.setProperty('--gy', `${gy}%`);
+        }
+        if (glareBack) {
+          glareBack.style.setProperty('--gx', `${gx}%`);
+          glareBack.style.setProperty('--gy', `${gy}%`);
+        }
+      });
+
+      heroZone.addEventListener('mouseleave', () => {
+        hoverOffsetX = 0;
+        hoverOffsetY = 0;
+        hoverRotX = 0;
+        hoverRotY = 0;
+      });
+    }
+
+    // Spring physics loop
+    function physicsLoop() {
+      if (!isDragging) {
+        // Idle gentle float (goyangan halus saat diam)
+        idleAngle += 0.025;
+        const idleFloatX = Math.sin(idleAngle) * 3 + hoverOffsetX;
+        const idleFloatY = Math.cos(idleAngle * 0.8) * 2.5 + hoverOffsetY;
+
+        // Damped harmonic spring physics menuju equilibrium
+        const k = 0.05; // Spring tension
+        const damping = 0.82; // Drag resistance
+
+        const ax = (idleFloatX - cardX) * k;
+        const ay = (idleFloatY - cardY) * k;
+
+        vx = (vx + ax) * damping;
+        vy = (vy + ay) * damping;
+
+        cardX += vx;
+        cardY += vy;
+
+        // Natural pendular swing rotations + hover tilt
+        rotZ += (-cardX * 0.22 - rotZ) * 0.1;
+        rotX += ((-cardY * 0.08 + hoverRotX) - rotX) * 0.12;
+        rotY += ((vx * 0.6 + hoverRotY) - rotY) * 0.12;
+      } else {
+        // Saat ditarik kursor: rotasi dinamis mengikuti tarikan
+        cardX += (targetX - cardX) * 0.45;
+        cardY += (targetY - cardY) * 0.45;
+
+        rotZ = -cardX * 0.26;
+        rotX = -cardY * 0.12;
+        rotY = (cardX * 0.15);
+      }
+
+      // Update transform kartu
+      idCard.style.transform = `translate3d(${cardX}px, ${cardY}px, 0px) rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
+
+      // Update kurva tali SVG
+      updateRope();
+
+      requestAnimationFrame(physicsLoop);
+    }
+
+    // Pointer events untuk interaksi drag & pull
+    function onPointerDown(e) {
+      if (e.target.closest('.card-direct-link')) return; // biarkan link QR diklik
+      isDragging = true;
+      hasDragged = false;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      dragStartX = clientX - cardX;
+      dragStartY = clientY - cardY;
+
+      window.addEventListener('pointermove', onPointerMove, { passive: false });
+      window.addEventListener('pointerup', onPointerUp);
+      window.addEventListener('touchmove', onPointerMove, { passive: false });
+      window.addEventListener('touchend', onPointerUp);
+    }
+
+    function onPointerMove(e) {
+      if (!isDragging) return;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const nextX = clientX - dragStartX;
+      const nextY = clientY - dragStartY;
+
+      // Batasi jarak tarikan maksimum agar tali tetap elastis
+      const dist = Math.hypot(nextX, nextY);
+      if (dist > 10) hasDragged = true;
+
+      const maxDist = 260;
+      if (dist > maxDist) {
+        const ratio = maxDist / dist;
+        targetX = nextX * ratio;
+        targetY = nextY * ratio;
+      } else {
+        targetX = nextX;
+        targetY = nextY;
+      }
+
+      if (e.cancelable) e.preventDefault();
+    }
+
+    function onPointerUp() {
+      if (!isDragging) return;
+      isDragging = false;
+      // Berikan impuls kecepatan balik (snap back effect)
+      vx = (targetX - cardX) * 0.2;
+      vy = (targetY - cardY) * 0.2;
+
+      window.removeEventListener('pointermove', onPointerMove);
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('touchmove', onPointerMove);
+      window.removeEventListener('touchend', onPointerUp);
+    }
+
+    idCard.addEventListener('pointerdown', onPointerDown);
+    idCard.addEventListener('touchstart', onPointerDown, { passive: true });
+
+    // Klik kartu untuk flip balik sisi (kecuali jika sedang drag)
+    idCard.addEventListener('click', (e) => {
+      if (hasDragged) return;
+      if (e.target.closest('.card-direct-link')) return;
+      idCard.classList.toggle('flipped');
+    });
+
+    // Inisialisasi awal
+    updateRope();
+    requestAnimationFrame(physicsLoop);
+  }
 });
